@@ -1,0 +1,32 @@
+{
+  "displayName": "Tailwindcss Plugin Material-Tokens",
+  "name": "@glare-labs/tailwindcss-material-tokens",
+  "version": "0.0.0",
+  "description": "A tailwindcss plugin that imports material tokens",
+  "keywords": [
+    "material",
+    "tokens",
+    "material-design",
+    "material-tokens",
+    "tailwindcss",
+    "plugin",
+    "tailwindcss-plugin"
+  ],
+  "homepage": "https://github.com/glare-labs/tailwindcss-material-tokens",
+  "bugs": {
+    "url": "https://github.com/glare-labs/tailwindcss-material-tokens/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glare-labs/tailwindcss-material-tokens.git"
+  },
+  "main": "index.js",
+  "module": "index.js",
+  "scripts": {},
+  "author": "bre97-web",
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+  "type": "module"
+}
