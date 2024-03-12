@@ -3,11 +3,12 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "build",
-    "declaration": true,
-    "isolatedModules": true,
-    "composite": true,
-    "noEmit": true,
-    "esModuleInterop": true
+    "allowJs": true,
+    "esModuleInterop": true,
+    "moduleResolution": "Bundler",
+    "module": "ESNext",
+    "target": "ESNext",
+    "skipLibCheck": true,
   },
   "include": [
     "src/**/*.ts",
