@@ -1,7 +1,7 @@
 {
   "displayName": "Tailwindcss Plugin Material-Tokens",
   "name": "@glare-labs/tailwindcss-material-tokens",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "publishConfig": {
     "access": "public"
   },
@@ -23,21 +23,25 @@
     "type": "git",
     "url": "git+https://github.com/glare-labs/tailwindcss-material-tokens.git"
   },
-  "main": "build/src/index.js",
-  "module": "build/src/index.js",
+  "main": "build/cjs/index.js",
+  "module": "build/esm/index.js",
   "files": [
-    "build/src/**/*"
+    "build/**/*"
   ],
   "exports": {
-    ".": {
-      "import": "./build/src/index.js"
-    }
+    "import": "./build/esm/index.js",
+    "require": "./build/cjs/index.js",
+    "types": "./build/types/index.d.ts",
+    "node": "./build/cjs/index.js"
   },
-  "types": "/build/src/index.d.ts",
+  "types": "/build/types/index.d.ts",
   "scripts": {
     "lint": "gts lint",
     "clean": "gts clean",
-    "compile": "tsc",
+    "compile": "npm run c:cjs && npm run c:esm && npm run c:types",
+    "c:cjs": "npx tsc --module commonjs --outdir build/cjs --declaration false",
+    "c:esm": "npx tsc --module esnext  --moduleresolution bundler --outdir build/esm --declaration false",
+    "c:types": "npx tsc --module esnext  --moduleresolution bundler --outdir build/types --emitdeclarationonly",
     "fix": "gts fix",
     "prepare": "npm.cmd run compile",
     "pretest": "npm.cmd run compile",
