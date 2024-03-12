@@ -7,17 +7,16 @@ npm i -D @glare-labs/tailwindcss-material-tokens
 ```
 
 ```javascript
-import tmt from '@glare-labs/tailwindcss-material-tokens'
+import { TailwindcssMaterialTokens } from '@glare-labs/tailwindcss-material-tokens'
 
 /** @type {import('tailwindcss').Config} */
 export default {
     // ...
 
     plugins: [
-        tmt
+        ...TailwindcssMaterialTokens.FullTokens,
     ],
 }
-
 ```
 
 ## Usage
