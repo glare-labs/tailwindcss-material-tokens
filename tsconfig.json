@@ -3,12 +3,11 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "build",
-    "allowJs": true,
-    "target": "ES2015",
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "preserveConstEnums": true
   },
   "include": [
     "src/**/*.ts",
