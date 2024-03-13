@@ -1,6 +1,10 @@
 # tailwindcss-material-tokens
 Import the tokens of web components in material 3 into tailwindcss and use them through plugins.
 
++ ESM Supported
++ CommonJs Supported
++ Typescript Supported
+
 
 ```
 npm i -D @glare-labs/tailwindcss-material-tokens
