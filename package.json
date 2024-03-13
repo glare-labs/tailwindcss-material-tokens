@@ -1,7 +1,7 @@
 {
   "displayName": "Tailwindcss Plugin Material-Tokens",
   "name": "@glare-labs/tailwindcss-material-tokens",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publishConfig": {
     "access": "public"
   },
@@ -23,25 +23,30 @@
     "type": "git",
     "url": "git+https://github.com/glare-labs/tailwindcss-material-tokens.git"
   },
-  "main": "build/cjs/index.js",
-  "module": "build/esm/index.js",
+  "main": "build/index.cjs.js",
+  "module": "build/index.esm.js",
   "files": [
     "build/**/*"
   ],
   "exports": {
-    "import": "./build/esm/index.js",
-    "require": "./build/cjs/index.js",
-    "types": "./build/types/index.d.ts",
-    "node": "./build/cjs/index.js"
+    ".": {
+      "import": "./build/index.esm.js",
+      "require": "./build/index.cjs.js",
+      "types": "./build/index.d.ts",
+      "default": "./build/index.esm.js"
+    },
+    "./*": {
+      "import": "./*.js",
+      "require": "./*.js",
+      "types": "./index.d.ts",
+      "default": "./*.js"
+    }
   },
-  "types": "/build/types/index.d.ts",
+  "types": "/build/index.d.ts",
   "scripts": {
     "lint": "gts lint",
     "clean": "gts clean",
-    "compile": "npm run c:cjs && npm run c:esm && npm run c:types",
-    "c:cjs": "npx tsc --module commonjs --outdir build/cjs --declaration false",
-    "c:esm": "npx tsc --module esnext  --moduleresolution bundler --outdir build/esm --declaration false",
-    "c:types": "npx tsc --module esnext  --moduleresolution bundler --outdir build/types --emitdeclarationonly",
+    "compile": "rollup --config",
     "fix": "gts fix",
     "prepare": "npm.cmd run compile",
     "pretest": "npm.cmd run compile",
@@ -51,8 +56,12 @@
   "license": "MIT",
   "type": "module",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
     "@types/node": "20.8.2",
     "gts": "^5.2.0",
+    "rollup": "^4.13.0",
     "tailwindcss": "^3.4.1",
     "typescript": "~5.2.0"
   }
