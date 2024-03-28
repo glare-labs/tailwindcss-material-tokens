@@ -62,19 +62,19 @@ export class MaterialTokens {
     public static readonly ContainerTokens = plugin(({ addUtilities }) => {
         addUtilities({
             '.surface-container-lowest': {
-                'background-color': `var(--${this.Prefix}-surface-container-lowest, #ffffff`,
+                'background-color': `var(--${this.Prefix}-surface-container-lowest, #ffffff)`,
             },
             '.surface-container-low': {
-                'background-color': `var(--${this.Prefix}-surface-container-low, #f1f3ff`,
+                'background-color': `var(--${this.Prefix}-surface-container-low, #f1f3ff)`,
             },
             '.surface-container': {
-                'background-color': `var(--${this.Prefix}-surface-container, #ebedfa`,
+                'background-color': `var(--${this.Prefix}-surface-container, #ebedfa)`,
             },
             '.surface-container-high': {
-                'background-color': `var(--${this.Prefix}-surface-container-high, #e5e8f5`,
+                'background-color': `var(--${this.Prefix}-surface-container-high, #e5e8f5)`,
             },
             '.surface-container-highest': {
-                'background-color': `var(--${this.Prefix}-surface-container-highest, #dfe2ef`,
+                'background-color': `var(--${this.Prefix}-surface-container-highest, #dfe2ef)`,
             },
         })
     })
@@ -82,19 +82,19 @@ export class MaterialTokens {
     public static readonly BaseTokens = plugin(({ addUtilities }) => {
         addUtilities({
             '.background': {
-                'background-color': `var(--${this.Prefix}-background, #f9f9ff`,
+                'background-color': `var(--${this.Prefix}-background, #f9f9ff)`,
             },
             '.on-background': {
-                'color': `var(--${this.Prefix}-on-background, #181c25`,
+                'color': `var(--${this.Prefix}-on-background, #181c25)`,
             },
             '.surface': {
-                'background-color': `var(--${this.Prefix}-surface, #f9f9ff`,
+                'background-color': `var(--${this.Prefix}-surface, #f9f9ff)`,
             },
             '.surface-dim': {
-                'background-color': `var(--${this.Prefix}-surface-dim, #d7d9e6`,
+                'background-color': `var(--${this.Prefix}-surface-dim, #d7d9e6)`,
             },
             '.surface-bright': {
-                'background-color': `var(--${this.Prefix}-surface-bright, #f9f9ff`,
+                'background-color': `var(--${this.Prefix}-surface-bright, #f9f9ff)`,
             },
             '.on-surface': {
                 'color': `var(--${this.Prefix}-on-surface, #181c25)`,
