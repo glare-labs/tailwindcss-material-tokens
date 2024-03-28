@@ -1,6 +1,6 @@
 import plugin from 'tailwindcss/plugin.js'
 
-export class Typography {
+export class TypographyTokens {
 
     private static Prefix = 'md-typescale'
     public static SetPrefix(prefix: string) {
