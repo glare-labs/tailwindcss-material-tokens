@@ -11,7 +11,7 @@ npm i -D @glare-labs/tailwindcss-material-tokens
 ```
 
 ```javascript
-import { TailwindcssMaterialTokens } from '@glare-labs/tailwindcss-material-tokens'
+import { TailwindcssMaterialTokens, TypographyTokens } from '@glare-labs/tailwindcss-material-tokens'
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -19,6 +19,7 @@ export default {
 
     plugins: [
         ...TailwindcssMaterialTokens.FullTokens,
+        ...TypographyTokens.FullTokens,
     ],
 }
 ```
@@ -27,8 +28,8 @@ export default {
 
 For example:
 ```html
-<div class="border border-outline primary-container">
-    <p class="on-primary-container">Title</p>
+<div class="border border-outline primary">
+    <p class="on-primary">Title</p>
 </div>
 ```
 
@@ -84,3 +85,64 @@ For example:
 |tertiary-fixed-dim|background-color|var(--md-sys-color-tertiary-fixed-dim)|
 |on-tertiary-fixed|color|var(--md-sys-color-on-tertiary-fixed)|
 |on-tertiary-fixed-variant|color|var(--md-sys-color-on-tertiary-fixed-variant)|
+
+## Default Value
+
+```javascript
+{
+  primaryPaletteKeyColor: '#047aff',
+  secondaryPaletteKeyColor: '#727598',
+  tertiaryPaletteKeyColor: '#7b70a3',
+  neutralPaletteKeyColor: '#737782',
+  neutralVariantPaletteKeyColor: '#727785',
+  background: '#f9f9ff',
+  onBackground: '#181c25',
+  surface: '#f9f9ff',
+  surfaceDim: '#d7d9e6',
+  surfaceBright: '#f9f9ff',
+  surfaceContainerLowest: '#ffffff',
+  surfaceContainerLow: '#f1f3ff',
+  surfaceContainer: '#ebedfa',
+  surfaceContainerHigh: '#e5e8f5',
+  surfaceContainerHighest: '#dfe2ef',
+  onSurface: '#181c25',
+  surfaceVariant: '#dee2f2',
+  onSurfaceVariant: '#424753',
+  inverseSurface: '#2c303a',
+  inverseOnSurface: '#eef0fd',
+  outline: '#727785',
+  outlineVariant: '#c2c6d6',
+  shadow: '#000000',
+  scrim: '#000000',
+  surfaceTint: '#005ac1',
+  primary: '#005ac1',
+  onPrimary: '#ffffff',
+  primaryContainer: '#d8e2ff',
+  onPrimaryContainer: '#001a41',
+  inversePrimary: '#adc6ff',
+  secondary: '#595c7e',
+  onSecondary: '#ffffff',
+  secondaryContainer: '#dfe0ff',
+  onSecondaryContainer: '#151937',
+  tertiary: '#625789',
+  onTertiary: '#ffffff',
+  tertiaryContainer: '#e7deff',
+  onTertiaryContainer: '#1e1341',
+  error: '#ba1a1a',
+  onError: '#ffffff',
+  errorContainer: '#ffdad6',
+  onErrorContainer: '#410002',
+  primaryFixed: '#d8e2ff',
+  primaryFixedDim: '#adc6ff',
+  onPrimaryFixed: '#001a41',
+  onPrimaryFixedVariant: '#004494',
+  secondaryFixed: '#dfe0ff',
+  secondaryFixedDim: '#c1c4eb',
+  onSecondaryFixed: '#151937',
+  onSecondaryFixedVariant: '#414465',
+  tertiaryFixed: '#e7deff',
+  tertiaryFixedDim: '#ccbff8',
+  onTertiaryFixed: '#1e1341',
+  onTertiaryFixedVariant: '#4a4070'
+}
+```
