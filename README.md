@@ -1,8 +1,7 @@
 # tailwindcss-material-tokens
 Import the tokens of web components in material 3 into tailwindcss and use them through plugins.
 
-+ ESM Supported
-+ CommonJs Supported
++ ESM Supported Only
 + Typescript Supported
 
 
@@ -11,25 +10,29 @@ npm i -D @glare-labs/tailwindcss-material-tokens
 ```
 
 ```javascript
-import { TailwindcssMaterialTokens, TypographyTokens } from '@glare-labs/tailwindcss-material-tokens'
+import { ColorTokens, TypographyTokens, ElevationTokens, ShapeTokens } from '@glare-labs/tailwindcss-material-tokens'
 
 /** @type {import('tailwindcss').Config} */
 export default {
     // ...
 
     plugins: [
-        ...TailwindcssMaterialTokens.FullTokens,
+        ...ColorTokens.FullTokens,
         ...TypographyTokens.FullTokens,
+        ...ElevationTokens.FullTokens,
+        ...ShapeTokens.FullTokens,
     ],
 }
 ```
+_If you don’t want to be troubled by the original styles of tailwindcss, please try to turn off the styles that come with tailwindcss (color, rounded, shadow)._
+
 
 ## Usage
 
 For example:
 ```html
-<div class="border border-outline primary">
-    <p class="on-primary">Title</p>
+<div class="w-24 h-24 shape-large elevation-1 primary">
+    <p class="title-large on-primary">Title</p>
 </div>
 ```
 
@@ -85,9 +88,24 @@ For example:
 |tertiary-fixed-dim|background-color|var(--md-sys-color-tertiary-fixed-dim)|
 |on-tertiary-fixed|color|var(--md-sys-color-on-tertiary-fixed)|
 |on-tertiary-fixed-variant|color|var(--md-sys-color-on-tertiary-fixed-variant)|
+|elevation-none|box-shadow|none|
+|elevation-1|box-shadow|rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px|
+|elevation-2|box-shadow|rgba(0, 0, 0, 0.2) 0px 3px 3px -2px, rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px|
+|elevation-3|box-shadow|rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px|
+|elevation-4|box-shadow|rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px|
+|elevation-5|box-shadow|rgba(0, 0, 0, 0.2) 0px 7px 8px -4px, rgba(0, 0, 0, 0.14) 0px 12px 17px 2px, rgba(0, 0, 0, 0.12) 0px 5px 22px 4px|
+|shape-full|border-radius|9999px|
+|shape-extra|border-radius|28px|
+|shape-large|border-radius|16px|
+|shape-medium|border-radius|12px|
+|shape-small|border-radius|8px|
+|shape-extra|border-radius|4px|
+|shape-none|border-radius|none|
+
 
 ## Default Value
 
+_Contains only color._
 ```javascript
 {
   primaryPaletteKeyColor: '#047aff',
