@@ -12,7 +12,7 @@ import plugin from 'tailwindcss/plugin.js'
  * });
  */
 
-export class MaterialTokens {
+export class ColorTokens {
     private static Prefix = 'md-sys-color'
     public static SetPrefix(prefix: string) {
         this.Prefix = prefix
