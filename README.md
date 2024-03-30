@@ -103,7 +103,6 @@ For example:
 ## Default Value
 
 _Contains only color._
-
 ```javascript
 {
   primaryPaletteKeyColor: '#047aff',
