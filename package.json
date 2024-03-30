@@ -1,7 +1,7 @@
 {
   "displayName": "Tailwindcss Plugin Material-Tokens",
   "name": "@glare-labs/tailwindcss-material-tokens",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "publishConfig": {
     "access": "public"
   },
