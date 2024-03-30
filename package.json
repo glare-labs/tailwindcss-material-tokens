@@ -23,17 +23,17 @@
     "type": "git",
     "url": "git+https://github.com/glare-labs/tailwindcss-material-tokens.git"
   },
-  "main": "build/index.cjs.js",
-  "module": "build/index.esm.js",
+  "main": "build/index.js",
+  "module": "build/index.js",
   "files": [
     "build/**/*"
   ],
   "exports": {
     ".": {
-      "import": "./build/index.esm.js",
-      "require": "./build/index.cjs.js",
+      "import": "./build/index.js",
+      "require": "./build/index.js",
       "types": "./build/index.d.ts",
-      "default": "./build/index.esm.js"
+      "default": "./build/index.js"
     },
     "./*": {
       "import": "./*.js",
@@ -43,6 +43,7 @@
     }
   },
   "types": "/build/index.d.ts",
+  "typings": "/build/index.d.ts",
   "scripts": {
     "lint": "gts lint",
     "clean": "gts clean",
