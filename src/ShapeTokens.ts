@@ -4,25 +4,25 @@ export class ShapeTokens {
 
     public static BaseTokens = plugin(({ addUtilities }) => {
         addUtilities({
-            'shape-full': {
+            '.shape-full': {
                 'border-radius': '9999px'
             },
-            'shape-extra': {
+            '.shape-extra': {
                 'border-radius': '28px'
             },
-            'shape-large': {
+            '.shape-large': {
                 'border-radius': '16px'
             },
-            'shape-medium': {
+            '.shape-medium': {
                 'border-radius': '12px'
             },
-            'shape-small': {
+            '.shape-small': {
                 'border-radius': '8px'
             },
-            'shape-extra-small': {
+            '.shape-extra-small': {
                 'border-radius': '4px'
             },
-            'shape-none': {
+            '.shape-none': {
                 'border-radius': 'none'
             },
         })
