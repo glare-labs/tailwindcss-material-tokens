@@ -183,11 +183,21 @@ export class ColorTokens {
 
     public static readonly PaletteTokens = plugin(({ addUtilities }) => {
         addUtilities({
-            'primary-palette-key-color': `var(--${this.Prefix}-primary-palette-key-color, #047aff)`,
-            'secondary-palette-key-color': `var(--${this.Prefix}-secondary-palette-key-color, #727598)`,
-            'tertiary-palette-key-color': `var(--${this.Prefix}-tertiary-palette-key-color, #7b70a3)`,
-            'neutral-palette-key-color': `var(--${this.Prefix}-neutral-palette-key-color, #737782)`,
-            'neutral-variant-palette-key-color': `var(--${this.Prefix}-neutral-variant-palette-key-color, #727785)`,
+            '.primary-palette-key-color': {
+                'background-color': `var(--${this.Prefix}-primary-palette-key-color, #047aff)`,
+            },
+            '.secondary-palette-key-color': {
+                'background-color': `var(--${this.Prefix}-secondary-palette-key-color, #727598)`,
+            },
+            '.tertiary-palette-key-color': {
+                'background-color': `var(--${this.Prefix}-tertiary-palette-key-color, #7b70a3)`,
+            },
+            '.neutral-palette-key-color': {
+                'background-color': `var(--${this.Prefix}-neutral-palette-key-color, #737782)`,
+            },
+            '.neutral-variant-palette-key-color': {
+                'background-color': `var(--${this.Prefix}-neutral-variant-palette-key-color, #727785)`,
+            },
         })
     })
 
