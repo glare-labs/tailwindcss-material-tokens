@@ -25,6 +25,9 @@ export default {
 ```
 _If you don’t want to be troubled by the original styles of tailwindcss, please try to turn off the styles that come with tailwindcss (color, rounded, shadow)._
 
+![Screenshot1](https://github.com/glare-labs/tailwindcss-material-tokens/blob/main/imgs/Part-1.png?raw=true)
+![Screenshot2](https://github.com/glare-labs/tailwindcss-material-tokens/blob/main/imgs/Part-2.png?raw=true)
+
 ## Usage
 
 For example:
