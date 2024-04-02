@@ -44,6 +44,9 @@
   },
   "types": "build/index.d.ts",
   "typings": "build/index.d.ts",
+  "workspaces":[
+    "test"
+  ],
   "scripts": {
     "lint": "gts lint",
     "clean": "gts clean",
