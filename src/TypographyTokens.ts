@@ -7,8 +7,8 @@ export class TypographyTokens {
         this.Prefix = prefix
     }
 
-    public static readonly BaseTokens = plugin(({ addUtilities }) => {
-        addUtilities({
+    public static readonly BaseTokens = plugin(({ addComponents }) => {
+        addComponents({
             '.display-large': {
                 'font-weight': `var(--${this.Prefix}-display-large-font-weight, 400)`,
                 'font-size': `var(--${this.Prefix}-display-large-font-size, 57px)`,
