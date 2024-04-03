@@ -1,4 +1,4 @@
-import {ColorTokens, ElevationTokens, ShapeTokens, TypographyTokens} from '../build'
+import {ColorTokens, ElevationTokens, MotionTokens, ShapeTokens, TypographyTokens} from '../build'
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -13,6 +13,7 @@ export default {
     ...ElevationTokens.FullTokens,
     ...TypographyTokens.FullTokens,
     ...ShapeTokens.FullTokens,
+    ...MotionTokens.FullTokens,
   ],
 }
 

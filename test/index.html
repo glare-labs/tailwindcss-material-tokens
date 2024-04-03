@@ -4,6 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        @keyframes move {
+            10% {
+                left: 0;
+            }
+            45% {
+                left: calc(100% - 96px);
+            }
+            55% {
+                left: calc(100% - 96px);
+            }
+            90% {
+                left: 0;
+            }
+        }
+        .move {
+            animation-name: move;
+            animation-duration: 5000ms;
+            animation-iteration-count: infinite;
+            position: relative;
+        }
+    </style>
 </head>
 <body>
 
@@ -101,7 +123,7 @@
         </div>
 
         <h1>Color</h1>
-        <div class="flex flex-col gap-4 [&>div:]flex [&>div>span]:label-large [&>div>span]:w-20 [&>div>span]:h-10 [&>div>span]:inline-flex [&>div>span]:items-center [&>div>span]:justify-center">
+        <div class="flex flex-col gap-4 [&>div]:flex [&>div>span]:label-large [&>div>span]:w-20 [&>div>span]:h-10 [&>div>span]:inline-flex [&>div>span]:items-center [&>div>span]:justify-center">
             <div>
                 <span class="primary on-primary">P</span>
                 <span class="secondary on-secondary">S</span>
@@ -153,6 +175,28 @@
                 <span class="neutral-palette-key-color inverse-on-surface">PaletteN</span>
                 <span class="neutral-variant-palette-key-color inverse-on-surface">PaletteNV</span>
             </div>
+        </div>
+
+        <h1>Motion</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 [&>span]:w-24 [&>span]:h-10 overflow-clip relative [&>p]:grid md:[&>p]:place-content-center [&>p]:place-items-stretch">
+            <p>Emphasized</p>
+            <span class="primary-fixed-dim move motion-easing-emphasized">
+            </span>
+            <p>Emphasized Decelerate</p>
+            <span class="secondary-fixed-dim move motion-easing-emphasized-decelerate">
+            </span>
+            <p>Emphasized Accelerate</p>
+            <span class="tertiary-fixed-dim move motion-easing-emphasized-accelerate">
+            </span>
+            <p>Standard</p>
+            <span class="primary-fixed-dim move motion-easing-standard">
+            </span>
+            <p>Standard Decelerate</p>
+            <span class="secondary-fixed-dim move motion-easing-standard-decelerate">
+            </span>
+            <p>Standard Accelerate</p>
+            <span class="tertiary-fixed-dim move motion-easing-standard-accelerate">
+            </span>
         </div>
     </div>
 

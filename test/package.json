@@ -4,7 +4,8 @@
   "main": "tailwind.config.js",
   "private" :"true",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "build": "vite build"
   },
   "type": "module",
   "keywords": [],
