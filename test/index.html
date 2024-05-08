@@ -26,14 +26,46 @@
             position: relative;
         }
     </style>
+    <style>
+        #container {
+            position: relative;
+            z-index: 0;
+        }
+        #container::before {
+            content: '';
+            z-index: -1;
+            position: fixed;
+            width: 620px;
+            height: 620px;
+            border-radius: 9999px;
+            left: -160px;
+            top: -160px;
+            background-color: azure;
+            filter: blur(64px);
+        }
+        #container::after {
+            content: '';
+            z-index: -1;
+            position: fixed;
+            width: 620px;
+            height: 620px;
+            border-radius: 9999px;
+            right: -160px;
+            bottom: -160px;
+            background-color: cornsilk;
+            filter: blur(64px);
+        }
+    </style>
 </head>
 <body>
 
-    <div class="max-w-6xl mx-4 md:mx-16 lg:mx-32 xl:mx-auto flex flex-col justify-center [&>h1]:headline-large [&>h1+*]:border [&>h1+*]:border-outline-variant [&>h1~*]:shape-medium [&>h1]:mt-16 [&>h1]:mb-8 [&>h1+*]:p-4 [&>h1+*]:overflow-auto my-32">
-        <p>@glare-labs/tailwindcss-material-tokens</p>
+    <div id="container" class="max-w-6xl px-4 md:px-16 lg:px-32 xl:mx-auto flex flex-col justify-center [&>h1]:headline-large [&>h1+*]:border [&>h1+*]:border-outline [&>h1+*]:shape-medium [&>h1+*]:bg-surface-container-lowest [&>h1]:mt-16 [&>h1]:mb-8 [&>h1+*]:p-4 [&>h1+*]:overflow-auto py-32">
+        <p class="title-medium text-on-surface-variant">
+            tailwindcss-material-tokens
+        </p>
 
         <h1>Typography</h1>
-        <section>
+        <section class="[&>p]:text-on-surface">
             <p class="display-large">display-large</p>
             <p class="display-medium">display-medium</p>
             <p class="display-small">display-small</p>
@@ -62,140 +94,140 @@
         </div>
 
         <h1>Shape</h1>
-        <div class="flex gap-10 items-stretch">
+        <div class="flex gap-10 items-stretch [&>div>span]:w-10 [&>div>span]:h-10 [&>div>span]:inline-block [&>div>span]:bg-primary">
             <div>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-none"></span>
+                <span class="shape-none"></span>
             </div>
             <div>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-full"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-full-t"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-full-tl"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-full-tr"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-full-b"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-full-bl"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-full-br"></span>
+                <span class="shape-full"></span>
+                <span class="shape-full-t"></span>
+                <span class="shape-full-tl"></span>
+                <span class="shape-full-tr"></span>
+                <span class="shape-full-b"></span>
+                <span class="shape-full-bl"></span>
+                <span class="shape-full-br"></span>
             </div>
             <div>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-extra"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-extra-t"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-extra-tl"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-extra-tr"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-extra-b"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-extra-bl"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-extra-br"></span>
+                <span class="shape-extra"></span>
+                <span class="shape-extra-t"></span>
+                <span class="shape-extra-tl"></span>
+                <span class="shape-extra-tr"></span>
+                <span class="shape-extra-b"></span>
+                <span class="shape-extra-bl"></span>
+                <span class="shape-extra-br"></span>
             </div>
             <div>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-large"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-large-t"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-large-tl"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-large-tr"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-large-b"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-large-bl"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-large-br"></span>
+                <span class="shape-large"></span>
+                <span class="shape-large-t"></span>
+                <span class="shape-large-tl"></span>
+                <span class="shape-large-tr"></span>
+                <span class="shape-large-b"></span>
+                <span class="shape-large-bl"></span>
+                <span class="shape-large-br"></span>
             </div>
             <div>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-medium"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-medium-t"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-medium-tl"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-medium-tr"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-medium-b"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-medium-bl"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-medium-br"></span>
+                <span class="shape-medium"></span>
+                <span class="shape-medium-t"></span>
+                <span class="shape-medium-tl"></span>
+                <span class="shape-medium-tr"></span>
+                <span class="shape-medium-b"></span>
+                <span class="shape-medium-bl"></span>
+                <span class="shape-medium-br"></span>
             </div>
             <div>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-small"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-small-t"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-small-tl"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-small-tr"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-small-b"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-small-bl"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-small-br"></span>
+                <span class="shape-small"></span>
+                <span class="shape-small-t"></span>
+                <span class="shape-small-tl"></span>
+                <span class="shape-small-tr"></span>
+                <span class="shape-small-b"></span>
+                <span class="shape-small-bl"></span>
+                <span class="shape-small-br"></span>
             </div>
             <div>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-extra-small"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-extra-small-t"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-extra-small-tl"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-extra-small-tr"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-extra-small-b"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-extra-small-bl"></span>
-                <span class="w-10 h-10 inline-block bg-blue-500 shape-extra-small-br"></span>
+                <span class="shape-extra-small"></span>
+                <span class="shape-extra-small-t"></span>
+                <span class="shape-extra-small-tl"></span>
+                <span class="shape-extra-small-tr"></span>
+                <span class="shape-extra-small-b"></span>
+                <span class="shape-extra-small-bl"></span>
+                <span class="shape-extra-small-br"></span>
             </div>
         </div>
 
         <h1>Color</h1>
-        <div class="flex flex-col gap-4 [&>div]:flex [&>div>span]:label-large [&>div>span]:w-20 [&>div>span]:h-10 [&>div>span]:inline-flex [&>div>span]:items-center [&>div>span]:justify-center">
+        <div class="flex flex-col gap-4 [&>div]:flex [&>div>span]:label-large [&>div>span]:min-w-20 [&>div>span]:h-10 [&>div>span]:inline-flex [&>div>span]:items-center [&>div>span]:justify-center">
             <div>
-                <span class="primary on-primary">P</span>
-                <span class="secondary on-secondary">S</span>
-                <span class="tertiary on-tertiary">T</span>
-                <span class="error on-error">E</span>
+                <span class="bg-primary text-on-primary">P</span>
+                <span class="bg-secondary text-on-secondary">S</span>
+                <span class="bg-tertiary text-on-tertiary">T</span>
+                <span class="bg-error text-on-error">E</span>
             </div>
             <div>
-                <span class="primary-container on-primary-container">PC</span>
-                <span class="secondary-container on-secondary-container">SC</span>
-                <span class="tertiary-container on-tertiary-container">TC</span>
-                <span class="error-container on-error-container">EC</span>
+                <span class="bg-primary-container text-on-primary-container">PC</span>
+                <span class="bg-secondary-container text-on-secondary-container">SC</span>
+                <span class="bg-tertiary-container text-on-tertiary-container">TC</span>
+                <span class="bg-error-container text-on-error-container">EC</span>
             </div>
             <div>
-                <span class="primary-fixed on-primary-fixed">PCF</span>
-                <span class="primary-fixed-dim on-primary-fixed-variant">PCFD</span>
-                <span class="secondary-fixed on-secondary-fixed">SCF</span>
-                <span class="secondary-fixed-dim on-secondary-fixed-variant">SCFD</span>
-                <span class="tertiary-fixed on-tertiary-fixed">TCF</span>
-                <span class="tertiary-fixed-dim on-tertiary-fixed-variant">TCFD</span>
+                <span class="bg-primary-fixed text-on-primary-fixed">PCF</span>
+                <span class="bg-primary-fixed-dim text-on-primary-fixed-variant">PCFD</span>
+                <span class="bg-secondary-fixed text-on-secondary-fixed">SCF</span>
+                <span class="bg-secondary-fixed-dim text-on-secondary-fixed-variant">SCFD</span>
+                <span class="bg-tertiary-fixed text-on-tertiary-fixed">TCF</span>
+                <span class="bg-tertiary-fixed-dim text-on-tertiary-fixed-variant">TCFD</span>
             </div>
             <div>
-                <span class="on-surface surface-container-lowest">SCLowest</span>
-                <span class="on-surface surface-container-low">SCLow</span>
-                <span class="on-surface surface-container">SC</span>
-                <span class="on-surface surface-container-high">SCHigh</span>
-                <span class="on-surface surface-container-highest">SCHighest</span>
+                <span class="text-on-surface bg-surface-container-lowest">SCLowest</span>
+                <span class="text-on-surface bg-surface-container-low">SCLow</span>
+                <span class="text-on-surface bg-surface-container">SC</span>
+                <span class="text-on-surface bg-surface-container-high">SCHigh</span>
+                <span class="text-on-surface bg-surface-container-highest">SCHighest</span>
             </div>
             <div>
-                <span class="surface on-surface">Surface</span>
-                <span class="surface-variant on-surface-variant">SurfaceV</span>
-                <span class="surface-dim on-surface">SurfaceD</span>
-                <span class="surface-bright on-surface">SurfaceB</span>
-                <span class="surface-tint inverse-on-surface">SurfaceT</span>
-                <span class="inverse-surface inverse-on-surface">SurfaceI</span>
+                <span class="bg-surface-bright text-on-surface">SurfaceB</span>
+                <span class="bg-surface text-on-surface">Surface</span>
+                <span class="bg-surface-variant text-on-surface-variant">SurfaceV</span>
+                <span class="bg-surface-dim text-on-surface">SurfaceD</span>
+                <span class="bg-surface-tint text-inverse-on-surface">SurfaceT</span>
+                <span class="bg-inverse-surface text-inverse-on-surface">SurfaceI</span>
             </div>
             <div>
-                <span class="shadow shadow-md on-surface">Shadow</span>
-                <span class="scrim inverse-on-surface">Scrim</span>
-                <span class="background on-background">Background</span>
+                <span class="bg-shadow text-surface">Shadow</span>
+                <span class="bg-scrim text-inverse-on-surface">Scrim</span>
+                <span class="bg-background text-on-background">Background</span>
             </div>
             <div>
-                <span class="border border-outline">B</span>
-                <span class="border border-outline-variant">BV</span>
+                <span class="bg-outline text-surface-variant">B</span>
+                <span class="bg-outline-variant text-surface">BV</span>
             </div>
             <div>
-                <span class="primary-palette-key-color inverse-on-surface">PaletteP</span>
-                <span class="secondary-palette-key-color inverse-on-surface">PaletteS</span>
-                <span class="tertiary-palette-key-color inverse-on-surface">PaletteT</span>
-                <span class="neutral-palette-key-color inverse-on-surface">PaletteN</span>
-                <span class="neutral-variant-palette-key-color inverse-on-surface">PaletteNV</span>
+                <span class="bg-primary-palette-key-color text-inverse-on-surface">PaletteP</span>
+                <span class="bg-secondary-palette-key-color text-inverse-on-surface">PaletteS</span>
+                <span class="bg-tertiary-palette-key-color text-inverse-on-surface">PaletteT</span>
+                <span class="bg-neutral-palette-key-color text-inverse-on-surface">PaletteN</span>
+                <span class="bg-neutral-variant-palette-key-color text-inverse-on-surface">PaletteNV</span>
             </div>
         </div>
 
         <h1>Motion</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 [&>span]:w-24 [&>span]:h-10 overflow-clip relative [&>p]:grid md:[&>p]:place-content-center [&>p]:place-items-stretch">
             <p>Emphasized</p>
-            <span class="primary-fixed-dim move motion-easing-emphasized">
+            <span class="bg-primary-fixed-dim move motion-easing-emphasized">
             </span>
             <p>Emphasized Decelerate</p>
-            <span class="secondary-fixed-dim move motion-easing-emphasized-decelerate">
+            <span class="bg-secondary-fixed-dim move motion-easing-emphasized-decelerate">
             </span>
             <p>Emphasized Accelerate</p>
-            <span class="tertiary-fixed-dim move motion-easing-emphasized-accelerate">
+            <span class="bg-tertiary-fixed-dim move motion-easing-emphasized-accelerate">
             </span>
             <p>Standard</p>
-            <span class="primary-fixed-dim move motion-easing-standard">
+            <span class="bg-primary-fixed-dim move motion-easing-standard">
             </span>
             <p>Standard Decelerate</p>
-            <span class="secondary-fixed-dim move motion-easing-standard-decelerate">
+            <span class="bg-secondary-fixed-dim move motion-easing-standard-decelerate">
             </span>
             <p>Standard Accelerate</p>
-            <span class="tertiary-fixed-dim move motion-easing-standard-accelerate">
+            <span class="bg-tertiary-fixed-dim move motion-easing-standard-accelerate">
             </span>
         </div>
     </div>
