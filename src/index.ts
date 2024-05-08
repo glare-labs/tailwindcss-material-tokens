@@ -1,5 +1,6 @@
-export * from './ColorTokens'
-export * from './TypographyTokens'
-export * from './ElevationTokens'
-export * from './ShapeTokens'
-export * from './MotionTokens'
+/**
+ * @deprecated
+ */
+export * from './deprecated/ColorTokens'
+
+export * from './tokens/index'

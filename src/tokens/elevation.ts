@@ -1,8 +1,8 @@
-import plugin from "tailwindcss/plugin"
+import plugin from 'tailwindcss/plugin.js'
 
-export class ElevationTokens {
+export class Elevation {
 
-    public static BaseTokens = plugin(({ addUtilities }) => {
+    public static readonly plugin = plugin(({ addUtilities }) => {
         addUtilities({
             '.elevation-none': {
                 'box-shadow': `none`,
@@ -24,7 +24,5 @@ export class ElevationTokens {
             },
         })
     })
-
-    public static readonly FullTokens = [this.BaseTokens]
 
 }

@@ -1,8 +1,8 @@
-import plugin from "tailwindcss/plugin"
+import plugin from 'tailwindcss/plugin'
 
-export class ShapeTokens {
+export class Shape {
 
-    public static BaseTokens = plugin(({ addUtilities }) => {
+    public static readonly plugin = plugin(({ addUtilities }) => {
         addUtilities({
             '.shape-full': {
                 'border-radius': '9999px'
@@ -153,7 +153,5 @@ export class ShapeTokens {
             },
         })
     })
-
-    public static readonly FullTokens = [this.BaseTokens]
 
 }

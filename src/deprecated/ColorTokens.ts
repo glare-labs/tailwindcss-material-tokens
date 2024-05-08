@@ -12,6 +12,9 @@ import plugin from 'tailwindcss/plugin.js'
  * });
  */
 
+/**
+ * @deprecated
+ */
 export class ColorTokens {
     private static Prefix = 'md-sys-color'
     public static SetPrefix(prefix: string) {
