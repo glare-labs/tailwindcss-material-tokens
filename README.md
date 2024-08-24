@@ -9,21 +9,20 @@ npm i -D @glare-labs/tailwindcss-material-tokens
 ```
 
 ```javascript
-import { ColorTokens, TypographyTokens, ElevationTokens, ShapeTokens } from '@glare-labs/tailwindcss-material-tokens'
+import { provideAll } from '@glare-labs/tailwindcss-material-tokens'
+
+const all = provideAll()
 
 /** @type {import('tailwindcss').Config} */
 export default {
     // ...
 
     plugins: [
-        ...ColorTokens.FullTokens,
-        ...TypographyTokens.FullTokens,
-        ...ElevationTokens.FullTokens,
-        ...ShapeTokens.FullTokens,
+        ...all.allPlugins()
     ],
 }
 ```
-_If you don’t want to be troubled by the original styles of tailwindcss, please try to turn off the styles that come with tailwindcss (color, rounded, shadow)._
+_If you don’t want to be troubled by the original styles of tailwindcss, please try to turn off the styles that come with tailwindcss (color, rounded, shadow, text)._
 
 ![Screenshot1](https://github.com/glare-labs/tailwindcss-material-tokens/blob/main/imgs/Part-1.png?raw=true)
 ![Screenshot2](https://github.com/glare-labs/tailwindcss-material-tokens/blob/main/imgs/Part-2.png?raw=true)
@@ -32,76 +31,57 @@ _If you don’t want to be troubled by the original styles of tailwindcss, pleas
 
 For example:
 ```html
-<div class="w-24 h-24 shape-large elevation-1 primary">
-    <p class="title-large on-primary">Title</p>
+<div class="w-24 h-24 shape-large elevation-1 bg-primary">
+    <p class="text-title-large text-on-primary">Title</p>
 </div>
 ```
 
-## Mapping
-|Tailwindcss Util Name|CSS Property|Value|
-|:--|--:|:--|
-|background|background-color|var(--md-sys-color-background)|
-|on-background|color|var(--md-sys-color-on-background)|
-|surface|background-color|var(--md-sys-color-surface)|
-|surface-dim|background-color|var(--md-sys-color-surface-dim)|
-|surface-bright|background-color|var(--md-sys-color-surface-bright)|
-|surface-container-lowest|background-color|var(--md-sys-color-surface-container-lowest)|
-|surface-container-low|background-color|var(--md-sys-color-surface-container-low)|
-|surface-container|background-color|var(--md-sys-color-surface-container)|
-|surface-container-high|background-color|var(--md-sys-color-surface-container-high)|
-|surface-container-highest|background-color|var(--md-sys-color-surface-container-highest)|
-|on-surface|color|var(--md-sys-color-on-surface)|
-|surface-variant|background-color|var(--md-sys-color-surface-variant)|
-|on-surface-variant|color|var(--md-sys-color-on-surface-variant)|
-|inverse-surface|background-color|var(--md-sys-color-inverse-surface)|
-|inverse-on-surface|color|var(--md-sys-color-inverse-on-surface)|
-|border-outline|border-color|var(--md-sys-color-outline)|
-|border-outline-variant|border-color|var(--md-sys-color-outline-variant)|
-|shadow|--tw-shadow-color|var(--md-sys-color-shadow)|
-|scrim|background-color|var(--md-sys-color-scrim)|
-|surface-tint|background-color|var(--md-sys-color-surface-tint)|
-|primary|background-color|var(--md-sys-color-primary)|
-|on-primary|color|var(--md-sys-color-on-primary)|
-|primary-container|background-color|var(--md-sys-color-primary-container)|
-|on-primary-container|color|var(--md-sys-color-on-primary-container)|
-|inverse-primary|background-color|var(--md-sys-color-inverse-primary)|
-|secondary|background-color|var(--md-sys-color-secondary)|
-|on-secondary|color|var(--md-sys-color-on-secondary)|
-|secondary-container|background-color|var(--md-sys-color-secondary-container)|
-|on-secondary-container|color|var(--md-sys-color-on-secondary-container)|
-|tertiary|background-color|var(--md-sys-color-tertiary)|
-|on-tertiary|color|var(--md-sys-color-on-tertiary)|
-|tertiary-container|background-color|var(--md-sys-color-tertiary-container)|
-|on-tertiary-container|color|var(--md-sys-color-on-tertiary-container)|
-|error|background-color|var(--md-sys-color-error)|
-|on-error|color|var(--md-sys-color-on-error)|
-|error-container|background-color|var(--md-sys-color-error-container)|
-|on-error-container|color|var(--md-sys-color-on-error-container)|
-|primary-fixed|background-color|var(--md-sys-color-primary-fixed)|
-|primary-fixed-dim|background-color|var(--md-sys-color-primary-fixed-dim)|
-|on-primary-fixed|color|var(--md-sys-color-on-primary-fixed)|
-|on-primary-fixed-variant|color|var(--md-sys-color-on-primary-fixed-variant)|
-|secondary-fixed|background-color|var(--md-sys-color-secondary-fixed)|
-|secondary-fixed-dim|background-color|var(--md-sys-color-secondary-fixed-dim)|
-|on-secondary-fixed|color|var(--md-sys-color-on-secondary-fixed)|
-|on-secondary-fixed-variant|color|var(--md-sys-color-on-secondary-fixed-variant)|
-|tertiary-fixed|background-color|var(--md-sys-color-tertiary-fixed)|
-|tertiary-fixed-dim|background-color|var(--md-sys-color-tertiary-fixed-dim)|
-|on-tertiary-fixed|color|var(--md-sys-color-on-tertiary-fixed)|
-|on-tertiary-fixed-variant|color|var(--md-sys-color-on-tertiary-fixed-variant)|
-|elevation-none|box-shadow|none|
-|elevation-1|box-shadow|rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px|
-|elevation-2|box-shadow|rgba(0, 0, 0, 0.2) 0px 3px 3px -2px, rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px|
-|elevation-3|box-shadow|rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px|
-|elevation-4|box-shadow|rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px|
-|elevation-5|box-shadow|rgba(0, 0, 0, 0.2) 0px 7px 8px -4px, rgba(0, 0, 0, 0.14) 0px 12px 17px 2px, rgba(0, 0, 0, 0.12) 0px 5px 22px 4px|
-|shape-full|border-radius|9999px|
-|shape-extra|border-radius|28px|
-|shape-large|border-radius|16px|
-|shape-medium|border-radius|12px|
-|shape-small|border-radius|8px|
-|shape-extra|border-radius|4px|
-|shape-none|border-radius|none|
+### provideColor & provide*
+```typescript
+import { provideColor, provideElevation, provideMotion, provideShape, provideTypography } from '@glare-labs/tailwindcss-material-tokens'
+
+const color = provideColor()
+const elevation = provideElevation()
+const motion = provideMotion()
+const shape = provideShape()
+const typography = provideTypography()
+
+/** @type {import('tailwindcss').Config} */
+export default {
+    // ...
+
+    plugins: [
+        color.plugin(),
+        elevation.plugin(),
+        motion.plugin(),
+        shape.plugin(),
+        typography.plugin(),
+    ],
+}
+```
+
+### provideAll
+provideAll includes:
+- color
+- elevation
+- motion
+- shape
+- typography
+
+```typescript
+import { provideAll } from '@glare-labs/tailwindcss-material-tokens'
+
+const all = provideAll()
+
+/** @type {import('tailwindcss').Config} */
+export default {
+    // ...
+
+    plugins: [
+        ...all.allPlugins()
+    ],
+}
+```
 
 ## Default Value
 
