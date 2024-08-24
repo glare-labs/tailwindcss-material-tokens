@@ -5,9 +5,16 @@
     "outDir": "build",
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
+    "moduleResolution": "bundler",
+    "importHelpers": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "preserveConstEnums": true
+    "verbatimModuleSyntax": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "lib": [
+      "ES2022"
+    ],
   },
   "include": [
     "src/**/*.ts",
