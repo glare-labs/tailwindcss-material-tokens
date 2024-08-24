@@ -1,5 +1,9 @@
 import plugin from 'tailwindcss/plugin'
 
+/**
+ * @deprecated
+ * Use provideShape() instead of Shape
+ */
 export class Shape {
 
     public static readonly plugin = plugin(({ addUtilities }) => {

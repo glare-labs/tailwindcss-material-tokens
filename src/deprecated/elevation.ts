@@ -1,5 +1,9 @@
 import plugin from 'tailwindcss/plugin.js'
 
+/**
+ * @deprecated
+ * Use provideElevation() instead of Elevation
+ */
 export class Elevation {
 
     public static readonly plugin = plugin(({ addUtilities }) => {

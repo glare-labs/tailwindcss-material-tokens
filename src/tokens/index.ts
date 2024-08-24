@@ -1,6 +1,7 @@
 
-export * from './color'
-export * from './elevation'
-export * from './shape'
-export * from './motion'
-export * from './typography'
+export * from './provide-all'
+export * from './provide-color'
+export * from './provide-elevation'
+export * from './provide-motion'
+export * from './provide-shape'
+export * from './provide-typography'

@@ -1,5 +1,9 @@
 import plugin from 'tailwindcss/plugin.js'
 
+/**
+ * @deprecated
+ * Use provideColor() instead of Color
+ */
 export class Color {
     public static colorPrefix = 'md-sys-color'
     public static setDefaultVariantPrefix(prefix: string) {
@@ -205,7 +209,7 @@ export class Color {
                 'color': `var(--${this.colorPrefix}-shadow, #000000)`,
             },
         })
-    
+
         /**
          * Border
          */
@@ -217,7 +221,7 @@ export class Color {
                 'border-color': `var(--${this.colorPrefix}-outline-variant, #c2c6d6)`,
             },
         })
-    
+
         /**
          * Containers, background-color only.
          */
@@ -238,7 +242,7 @@ export class Color {
                 'background-color': `var(--${this.colorPrefix}-surface-container-highest, #dfe2ef)`,
             },
         })
-    
+
         /**
          * Fixed colors
          */

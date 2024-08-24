@@ -1,5 +1,9 @@
 import plugin from 'tailwindcss/plugin'
 
+/**
+ * @deprecated
+ * Use provideMotion() instead of Motion
+ */
 export class Motion {
     private static motionPrefix = 'md-sys-motion'
     public static setDefaultVariantPrefix(prefix: string) {

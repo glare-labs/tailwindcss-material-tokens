@@ -1,5 +1,9 @@
 import plugin from 'tailwindcss/plugin.js'
 
+/**
+ * @deprecated
+ * Use provideTypography() instead of Typography
+ */
 export class Typography {
 
     private static typescalePrefix = 'md-sys-typescale'
@@ -7,7 +11,7 @@ export class Typography {
         this.typescalePrefix = prefix
         return this
     }
-    
+
     public static readonly plugin = plugin(({ addComponents }) => {
         addComponents({
             '.display-large': {
@@ -106,5 +110,5 @@ export class Typography {
             },
         })
     })
-    
+
 }
