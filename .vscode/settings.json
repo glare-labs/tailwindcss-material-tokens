@@ -1,0 +1,16 @@
+{
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "always",
+        "source.sortImports": "always",
+        "source.removeUnusedImports": "always",
+        "source.fixAll.ts": "always"
+    },
+    "files.insertFinalNewline": true,
+    "javascript.autoClosingTags": true,
+    "javascript.format.semicolons": "remove",
+    "javascript.format.insertSpaceAfterConstructor": true,
+    "html.format.wrapAttributes": "force-expand-multiline",
+    "html.format.wrapAttributesIndentSize": 4,
+    "html.autoClosingTags": true,
+}
