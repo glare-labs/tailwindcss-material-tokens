@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
     <title>Document</title>
     <style>
         @keyframes move {
             10% {
                 left: 0;
             }
+
             45% {
                 left: calc(100% - 96px);
             }
+
             55% {
                 left: calc(100% - 96px);
             }
+
             90% {
                 left: 0;
             }
         }
+
         .move {
             animation-name: move;
             animation-duration: 5000ms;
@@ -31,6 +39,7 @@
             position: relative;
             z-index: 0;
         }
+
         #container::before {
             content: '';
             z-index: -1;
@@ -43,6 +52,7 @@
             background-color: azure;
             filter: blur(64px);
         }
+
         #container::after {
             content: '';
             z-index: -1;
@@ -57,30 +67,34 @@
         }
     </style>
 </head>
+
 <body>
 
-    <div id="container" class="max-w-6xl px-4 md:px-16 lg:px-32 xl:mx-auto flex flex-col justify-center [&>h1]:headline-large [&>h1+*]:border [&>h1+*]:border-outline [&>h1+*]:shape-medium [&>h1+*]:bg-surface-container-lowest [&>h1]:mt-16 [&>h1]:mb-8 [&>h1+*]:p-4 [&>h1+*]:overflow-auto py-32">
+    <div
+        id="container"
+        class="max-w-6xl px-4 md:px-16 lg:px-32 xl:mx-auto flex flex-col justify-center [&>h1]:headline-large [&>h1+*]:border [&>h1+*]:border-outline [&>h1+*]:shape-medium [&>h1+*]:bg-surface-container-lowest [&>h1]:mt-16 [&>h1]:mb-8 [&>h1+*]:p-4 [&>h1+*]:overflow-auto py-32"
+    >
         <p class="title-medium text-on-surface-variant">
             tailwindcss-material-tokens
         </p>
 
         <h1>Typography</h1>
         <section class="[&>p]:text-on-surface">
-            <p class="display-large">display-large</p>
-            <p class="display-medium">display-medium</p>
-            <p class="display-small">display-small</p>
-            <p class="headline-large">headline-large</p>
-            <p class="headline-medium">headline-medium</p>
-            <p class="headline-small">headline-small</p>
-            <p class="title-large">title-large</p>
-            <p class="title-medium">title-medium</p>
-            <p class="title-small">title-small</p>
-            <p class="body-large">body-large</p>
-            <p class="body-medium">body-medium</p>
-            <p class="body-small">body-small</p>
-            <p class="label-large">label-large</p>
-            <p class="label-medium">label-medium</p>
-            <p class="label-small">label-small</p>
+            <p class="text-display-large">display-large</p>
+            <p class="text-display-medium">display-medium</p>
+            <p class="text-display-small">display-small</p>
+            <p class="text-headline-large">headline-large</p>
+            <p class="text-headline-medium">headline-medium</p>
+            <p class="text-headline-small">headline-small</p>
+            <p class="text-title-large">title-large</p>
+            <p class="text-title-medium">title-medium</p>
+            <p class="text-title-small">title-small</p>
+            <p class="text-body-large">body-large</p>
+            <p class="text-body-medium">body-medium</p>
+            <p class="text-body-small">body-small</p>
+            <p class="text-label-large">label-large</p>
+            <p class="text-label-medium">label-medium</p>
+            <p class="text-label-small">label-small</p>
         </section>
 
         <h1>Elevation</h1>
@@ -94,7 +108,8 @@
         </div>
 
         <h1>Shape</h1>
-        <div class="flex gap-10 items-stretch [&>div>span]:w-10 [&>div>span]:h-10 [&>div>span]:inline-block [&>div>span]:bg-primary">
+        <div
+            class="flex gap-10 items-stretch [&>div>span]:w-10 [&>div>span]:h-10 [&>div>span]:inline-block [&>div>span]:bg-primary">
             <div>
                 <span class="shape-none"></span>
             </div>
@@ -155,7 +170,8 @@
         </div>
 
         <h1>Color</h1>
-        <div class="flex flex-col gap-4 [&>div]:flex [&>div>span]:label-large [&>div>span]:min-w-20 [&>div>span]:h-10 [&>div>span]:inline-flex [&>div>span]:items-center [&>div>span]:justify-center">
+        <div
+            class="flex flex-col gap-4 [&>div]:flex [&>div>span]:label-large [&>div>span]:min-w-20 [&>div>span]:h-10 [&>div>span]:inline-flex [&>div>span]:items-center [&>div>span]:justify-center">
             <div>
                 <span class="bg-primary text-on-primary">P</span>
                 <span class="bg-secondary text-on-secondary">S</span>
@@ -210,29 +226,34 @@
         </div>
 
         <h1>Motion</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 [&>span]:w-24 [&>span]:h-10 overflow-clip relative [&>p]:grid md:[&>p]:place-content-center [&>p]:place-items-stretch">
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 [&>span]:w-24 [&>span]:h-10 overflow-clip relative [&>p]:grid md:[&>p]:place-content-center [&>p]:place-items-stretch">
             <p>Emphasized</p>
-            <span class="bg-primary-fixed-dim move motion-easing-emphasized">
+            <span class="bg-primary-fixed-dim move animation-easing-emphasized">
             </span>
             <p>Emphasized Decelerate</p>
-            <span class="bg-secondary-fixed-dim move motion-easing-emphasized-decelerate">
+            <span class="bg-secondary-fixed-dim move animation-easing-emphasized-decelerate">
             </span>
             <p>Emphasized Accelerate</p>
-            <span class="bg-tertiary-fixed-dim move motion-easing-emphasized-accelerate">
+            <span class="bg-tertiary-fixed-dim move animation-easing-emphasized-accelerate">
             </span>
             <p>Standard</p>
-            <span class="bg-primary-fixed-dim move motion-easing-standard">
+            <span class="bg-primary-fixed-dim move animation-easing-standard">
             </span>
             <p>Standard Decelerate</p>
-            <span class="bg-secondary-fixed-dim move motion-easing-standard-decelerate">
+            <span class="bg-secondary-fixed-dim move animation-easing-standard-decelerate">
             </span>
             <p>Standard Accelerate</p>
-            <span class="bg-tertiary-fixed-dim move motion-easing-standard-accelerate">
+            <span class="bg-tertiary-fixed-dim move animation-easing-standard-accelerate">
             </span>
         </div>
     </div>
 
 
-    <script type="module" src="./index.js"></script>
+    <script
+        type="module"
+        src="./index.ts"
+    ></script>
 </body>
+
 </html>
