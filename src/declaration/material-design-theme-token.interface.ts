@@ -1,0 +1,59 @@
+
+export interface IMaterialDesignThemeTokens {
+    primaryPaletteKeyColor: string
+    secondaryPaletteKeyColor: string
+    tertiaryPaletteKeyColor: string
+    neutralPaletteKeyColor: string
+    neutralVariantPaletteKeyColor: string
+    background: string
+    onBackground: string
+    surface: string
+    surfaceDim: string
+    surfaceBright: string
+    surfaceContainerLowest: string
+    surfaceContainerLow: string
+    surfaceContainer: string
+    surfaceContainerHigh: string
+    surfaceContainerHighest: string
+    onSurface: string
+    surfaceVariant: string
+    onSurfaceVariant: string
+    inverseSurface: string
+    inverseOnSurface: string
+    outline: string
+    outlineVariant: string
+    shadow: string
+    scrim: string
+    surfaceTint: string
+    primary: string
+    onPrimary: string
+    primaryContainer: string
+    onPrimaryContainer: string
+    inversePrimary: string
+    secondary: string
+    onSecondary: string
+    secondaryContainer: string
+    onSecondaryContainer: string
+    tertiary: string
+    onTertiary: string
+    tertiaryContainer: string
+    onTertiaryContainer: string
+    error: string
+    onError: string
+    errorContainer: string
+    onErrorContainer: string
+    primaryFixed: string
+    primaryFixedDim: string
+    onPrimaryFixed: string
+    onPrimaryFixedVariant: string
+    secondaryFixed: string
+    secondaryFixedDim: string
+    onSecondaryFixed: string
+    onSecondaryFixedVariant: string
+    tertiaryFixed: string
+    tertiaryFixedDim: string
+    onTertiaryFixed: string
+    onTertiaryFixedVariant: string
+}
+
+// export interface IMaterialDesignThemeToken

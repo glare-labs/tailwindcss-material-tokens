@@ -15,7 +15,16 @@ import { ColorProvider, type TColorProviderConstructorParams } from "./internal/
  * @description
  * Only colors are provided, with default values.
  * The developer needs to generate the Material Design theme color matching token into HTML or plug-in.
+ * 
+ * @example
+ * ```typescript
+ * const color = provideColor({
+ *     useDefaultValue: true,
+ *     defaultTokens: {
+ *          background: '#00ff00',
+ *          onBackground: '#ff00ff',
+ *     },
+ * })
+ * ```
  */
-export const provideColor = (params: TColorProviderConstructorParams = {
-    prefix: 'md-sys-color',
-}) => new ColorProvider(params)
+export const provideColor = (params?: Partial<TColorProviderConstructorParams>) => new ColorProvider(params ?? {})

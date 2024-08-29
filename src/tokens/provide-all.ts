@@ -10,18 +10,12 @@ import { provideShape } from "./provide-shape";
 import { provideTypography } from "./provide-typography";
 
 export function provideAll(params: {
-    color?: TColorProviderConstructorParams,
+    color?: Partial<TColorProviderConstructorParams>,
     elevation?: TElevationProviderConstructorParams,
     motion?: TMotionProviderConstructorParams,
     shape?: TShapeProviderConstructorParams,
     typography?: TTypographyProviderConstructorParams,
-} = {
-        color: { prefix: 'md-sys-color' },
-        elevation: { shadowToken: 'md-sys-color-shadow' },
-        motion: { prefix: 'md-sys-motion' },
-        shape: { prefix: 'md-sys-shape', defaultUnit: '1' },
-        typography: { prefix: 'md-sys-typescale' }
-    }) {
+}) {
     return ({
         color: provideColor(params.color),
         elevation: provideElevation(params.elevation),
