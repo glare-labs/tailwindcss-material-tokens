@@ -1,15 +1,20 @@
-import { provideColor, type TColorProviderConstructor } from "./provide-color";
-import { provideElevation, type TElevationProviderConstructor } from "./provide-elevation";
-import { provideMotion, type TMotionProviderConstructor } from "./provide-motion";
-import { provideShape, type TShapeProviderConstructor } from "./provide-shape";
-import { provideTypography, type TTypographyProviderConstructor } from "./provide-typography";
+import type { TColorProviderConstructorParams } from "./internal/color";
+import type { TElevationProviderConstructorParams } from "./internal/elevation";
+import type { TMotionProviderConstructorParams } from "./internal/motion";
+import type { TShapeProviderConstructorParams } from "./internal/shape";
+import type { TTypographyProviderConstructorParams } from "./internal/typography";
+import { provideColor } from "./provide-color";
+import { provideElevation } from "./provide-elevation";
+import { provideMotion } from "./provide-motion";
+import { provideShape } from "./provide-shape";
+import { provideTypography } from "./provide-typography";
 
 export function provideAll(params: {
-    color?: TColorProviderConstructor,
-    elevation?: TElevationProviderConstructor,
-    motion?: TMotionProviderConstructor,
-    shape?: TShapeProviderConstructor,
-    typography?: TTypographyProviderConstructor,
+    color?: TColorProviderConstructorParams,
+    elevation?: TElevationProviderConstructorParams,
+    motion?: TMotionProviderConstructorParams,
+    shape?: TShapeProviderConstructorParams,
+    typography?: TTypographyProviderConstructorParams,
 } = {
         color: { prefix: 'md-sys-color' },
         elevation: { shadowToken: 'md-sys-color-shadow' },
