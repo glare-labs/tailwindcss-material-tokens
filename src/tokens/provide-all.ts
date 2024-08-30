@@ -11,7 +11,7 @@ import { provideTypography } from "./provide-typography";
 
 export function provideAll(params: {
     color?: Partial<TColorProviderConstructorParams>,
-    elevation?: TElevationProviderConstructorParams,
+    elevation?: Partial<TElevationProviderConstructorParams>,
     motion?: TMotionProviderConstructorParams,
     shape?: TShapeProviderConstructorParams,
     typography?: TTypographyProviderConstructorParams,

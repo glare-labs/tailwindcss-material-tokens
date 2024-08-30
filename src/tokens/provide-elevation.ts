@@ -12,6 +12,4 @@ import { ElevationProvider, type TElevationProviderConstructorParams } from "./i
  * }
  * ```
  */
-export const provideElevation = (params: TElevationProviderConstructorParams = {
-    shadowToken: 'md-sys-color-shadow'
-}) => new ElevationProvider(params)
+export const provideElevation = (params?: Partial<TElevationProviderConstructorParams>) => new ElevationProvider(params ?? {})
