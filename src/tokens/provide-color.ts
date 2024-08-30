@@ -19,8 +19,8 @@ import { ColorProvider, type TColorProviderConstructorParams } from "./internal/
  * @example
  * ```typescript
  * const color = provideColor({
- *     useDefaultValue: true,
- *     defaultTokens: {
+ *     hardcodeDefaultValue: true,
+ *     customTokens: {
  *          background: '#00ff00',
  *          onBackground: '#ff00ff',
  *     },

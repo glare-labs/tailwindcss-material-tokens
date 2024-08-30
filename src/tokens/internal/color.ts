@@ -5,9 +5,79 @@ import { Strings } from "../../utils/strings"
 import { Validates } from "../../utils/validates"
 
 export type TColorProviderConstructorParams = {
+    /**
+     * @description
+     * For managed or public CSS variables.
+     * 
+     * @default 'md-sys-color'
+     * 
+     * @example If the value of prefix is 'your-prefix'.
+     * ```css
+     * .text-on-surface {
+     *     color: var(--your-prefix-on-surface, #181c25);
+     * }
+     * ```
+     */
     readonly prefix: string
+
+    /**
+     * @description
+     * This option can customize the CSS value corresponding to certain tokens.
+     * Note that this option ignores [hardcodeDefaultValue] and [prefix].
+     * 
+     * @default []
+     * 
+     * @example
+     * ```typescript
+     * const color = provideColor({
+     *     customTokens: {
+     *         // .bg-background { background-color: red; }
+     *         // .text-background { color: red; }
+     *         background: 'red',
+     *         // .bg-background { background-color: var(--my-color-surface, green); }
+     *         // .text-background { color: var(--my-color-surface, green); }
+     *         surface: 'var(--my-color-surface, green)'
+     *     },
+     * })
+     * ```
+     */
     readonly customTokens: IMaterialDesignThemeTokens | Record<string, string>
+
+    /**
+     * @description
+     * When set to true, each token contains a default value.
+     * 
+     * @default true
+     * 
+     * @example
+     * ```typescript
+     * const color = provideColor({
+     *     // .text-on-surface { color: var(--md-sys-color-on-surface, #181c25) }
+     *     hardcodeDefaultValue: true,
+     * 
+     *     // .text-on-surface { color: var(--md-sys-color-on-surface) }
+     *     hardcodeDefaultValue: false,
+     * })
+     * ```
+     */
     readonly hardcodeDefaultValue: boolean
+
+    /**
+     * @description
+     * Exclude some unnecessary tokens.
+     * 
+     * @default []
+     * 
+     * @example
+     * ```typescript
+     * const color = provideColor({
+     *     excludedTokens: [
+     *         // remove .bg-background and .text-background
+     *         'background',
+     *     ],
+     * })
+     * ```
+     */
     readonly excludedTokens: Array<(keyof IMaterialDesignThemeTokens) | {}>
 }
 
@@ -147,13 +217,15 @@ export class ColorProvider extends DefaultMaterialDesignThemeTokens implements I
     public tokens
     public hardcodeDefaultValue
     public excludedTokens
+    public customTokens
 
     constructor(params: Partial<TColorProviderConstructorParams>) {
         super()
         this.prefix = params.prefix ?? 'md-sys-color'
         this.hardcodeDefaultValue = params.hardcodeDefaultValue ?? true
         this.excludedTokens = params.excludedTokens ?? []
-        this.tokens = this.validate([(params.customTokens ?? {}) as Record<string, string>, this.defaultTokenRecord, this.excludedTokens])
+        this.customTokens = params.customTokens ?? {}
+        this.tokens = this.validate([(this.customTokens) as Record<string, string>, this.defaultTokenRecord, this.excludedTokens])
     }
 
     protected validate(params: Parameters<typeof Validates.validate>) {
@@ -161,18 +233,20 @@ export class ColorProvider extends DefaultMaterialDesignThemeTokens implements I
     }
 
     protected transformTokensToCssRuleObject(prefix: string, tokens: Record<string, string>, hardcodeDefaultValue: boolean) {
+        const cssPropertyComputed = (name: string, value: string) => !Object.hasOwn(this.customTokens, name) ? `var(--${prefix}-${Strings.toKebabCase(name)}, ${hardcodeDefaultValue ? value : ''})` : `${value}`
+
         const textTokens = Validates.transformTokenRecordToCssRuleObject(
             tokens,
             (name) => `.text-${Strings.toKebabCase(name)}`,
             (name, value) => ({
-                'color': `var(--${prefix}-${Strings.toKebabCase(name)}, ${hardcodeDefaultValue ? value : ''})`
+                'color': cssPropertyComputed(name, value)
             })
         )
         const bgTokens = Validates.transformTokenRecordToCssRuleObject(
             tokens,
             (name) => `.bg-${Strings.toKebabCase(name)}`,
             (name, value) => ({
-                'background-color': `var(--${prefix}-${Strings.toKebabCase(name)}, ${hardcodeDefaultValue ? value : ''})`
+                'background-color': cssPropertyComputed(name, value)
             })
         )
         return Object.assign({}, textTokens, bgTokens)
