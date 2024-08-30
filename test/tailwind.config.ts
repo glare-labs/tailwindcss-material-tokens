@@ -1,7 +1,12 @@
-// import { provideAll } from '../src/index'
-import { provideAll } from '../build/index'
+import { provideBorder, provideColor, provideElevation, provideMotion, provideShape, provideTypography, provideWindowMediaQuery } from '../src/index'
 
-const all = provideAll()
+const color = provideColor({})
+const elevation = provideElevation({})
+const motion = provideMotion()
+const shape = provideShape()
+const typo = provideTypography()
+const border = provideBorder({})
+const mq = provideWindowMediaQuery()
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -9,7 +14,13 @@ export default {
     './index.html'
   ],
   plugins: [
-    ...all.allPlugins()
+    color.getPlugin(),
+    elevation.getPlugin(),
+    motion.getPlugin(),
+    shape.getPlugin(),
+    typo.getPlugin(),
+    border.getPlugin(),
+    mq.getPlugin()
   ],
 }
 
