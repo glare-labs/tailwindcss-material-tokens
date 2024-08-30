@@ -66,15 +66,15 @@
             filter: blur(64px);
         }
     </style>
-  <script type="module" crossorigin src="/tailwindcss-material-tokens/assets/index-BSR5sT8f.js"></script>
-  <link rel="stylesheet" crossorigin href="/tailwindcss-material-tokens/assets/index-BjjVf_qB.css">
+  <script type="module" crossorigin src="/tailwindcss-material-tokens/assets/index-BYQOVHhy.js"></script>
+  <link rel="stylesheet" crossorigin href="/tailwindcss-material-tokens/assets/index-Cte0cwej.css">
 </head>
 
 <body>
 
     <div
         id="container"
-        class="max-w-6xl px-4 md:px-16 lg:px-32 xl:mx-auto flex flex-col justify-center [&>h1]:headline-large [&>h1+*]:border [&>h1+*]:border-outline [&>h1+*]:shape-medium [&>h1+*]:bg-surface-container-lowest [&>h1]:mt-16 [&>h1]:mb-8 [&>h1+*]:p-4 [&>h1+*]:overflow-auto py-32"
+        class="max-w-6xl px-4 md:px-16 lg:px-32 xl:mx-auto flex flex-col justify-center [&>h1]:text-headline-large [&>h1+*]:border [&>h1+*]:border-outline [&>h1+*]:shape-medium [&>h1+*]:bg-surface-container-lowest [&>h1]:mt-16 [&>h1]:mb-8 [&>h1+*]:p-4 [&>h1+*]:overflow-auto py-32"
     >
         <p class="title-medium text-on-surface-variant">
             tailwindcss-material-tokens
@@ -107,6 +107,14 @@
             <span class="w-24 h-24 inline-block elevation-3"></span>
             <span class="w-24 h-24 inline-block elevation-4"></span>
             <span class="w-24 h-24 inline-block elevation-5"></span>
+        </div>
+
+        <h1>Border / Outline</h1>
+        <div class="flex gap-10 [&>span]:w-24 [&>span]:h-24 [&>span]:inline-block">
+            <span class="border border-outline">border-outline</span>
+            <span class="border border-outline-variant">border-outline-variant</span>
+            <span class="outline outline-outline">outline-outline</span>
+            <span class="outline outline-outline-variant">outline-outline-variant</span>
         </div>
 
         <h1>Shape</h1>
@@ -173,7 +181,7 @@
 
         <h1>Color</h1>
         <div
-            class="flex flex-col gap-4 [&>div]:flex [&>div>span]:label-large [&>div>span]:min-w-20 [&>div>span]:h-10 [&>div>span]:inline-flex [&>div>span]:items-center [&>div>span]:justify-center">
+            class="flex flex-col gap-4 [&>div]:flex [&>div>span]:text-label-large [&>div>span]:min-w-20 [&>div>span]:h-10 [&>div>span]:inline-flex [&>div>span]:items-center [&>div>span]:justify-center">
             <div>
                 <span class="bg-primary text-on-primary">P</span>
                 <span class="bg-secondary text-on-secondary">S</span>
@@ -248,6 +256,15 @@
             <p>Standard Accelerate</p>
             <span class="bg-tertiary-fixed-dim move animation-easing-standard-accelerate">
             </span>
+        </div>
+
+        <h1>Window Media Query</h1>
+        <div class="[&>span]:w-full [&>span]:h-10 [&>span]:grid [&>span]:items-center [&>span]:justify-center">
+            <span class="compact:bg-primary compact:text-on-primary">Compact [max-width: 600px]</span>
+            <span class="medium:bg-primary medium:text-on-primary">Medium [max-width: 8400px]</span>
+            <span class="expanded:bg-primary expanded:text-on-primary">Expanded [max-width: 1200px]</span>
+            <span class="large:bg-primary large:text-on-primary">Large [max-width: 1600px]</span>
+            <span class="extra-large:bg-primary extra-large:text-on-primary">ExtraLarge [min-width: 1600px]</span>
         </div>
     </div>
 
