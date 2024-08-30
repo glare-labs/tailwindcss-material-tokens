@@ -1,13 +1,13 @@
 import plugin from "tailwindcss/plugin"
-import type { CSSRuleObject } from "tailwindcss/types/config"
 import type { IMaterialDesignThemeTokens } from "../../declaration/material-design-theme-token.interface"
 import type { IProvider } from "../../declaration/provider.interface"
 import { Strings } from "../../utils/strings"
+import { Validates } from "../../utils/validates"
 
 export type TColorProviderConstructorParams = {
     readonly prefix: string
-    readonly defaultTokens: IMaterialDesignThemeTokens | Record<string, string>
-    readonly useDefaultValue: boolean
+    readonly customTokens: IMaterialDesignThemeTokens | Record<string, string>
+    readonly hardcodeDefaultValue: boolean
     readonly excludedTokens: Array<(keyof IMaterialDesignThemeTokens) | {}>
 }
 
@@ -82,7 +82,7 @@ class DefaultMaterialDesignThemeTokens implements IMaterialDesignThemeTokens {
     onTertiaryFixed = '#1e1341'
     onTertiaryFixedVariant = '#4a4070'
 
-    public get defaultTokenValues() {
+    public get defaultTokenRecord() {
         return {
             primaryPaletteKeyColor: this.primaryPaletteKeyColor,
             secondaryPaletteKeyColor: this.secondaryPaletteKeyColor,
@@ -145,51 +145,41 @@ class DefaultMaterialDesignThemeTokens implements IMaterialDesignThemeTokens {
 export class ColorProvider extends DefaultMaterialDesignThemeTokens implements IProvider {
     public prefix
     public tokens
-    public useDefaultValue
+    public hardcodeDefaultValue
     public excludedTokens
 
     constructor(params: Partial<TColorProviderConstructorParams>) {
         super()
         this.prefix = params.prefix ?? 'md-sys-color'
-        this.useDefaultValue = params.useDefaultValue ?? true
+        this.hardcodeDefaultValue = params.hardcodeDefaultValue ?? true
         this.excludedTokens = params.excludedTokens ?? []
-        this.tokens = this.validate((params.defaultTokens ?? {}) as Record<string, string>)
+        this.tokens = this.validate([(params.customTokens ?? {}) as Record<string, string>, this.defaultTokenRecord, this.excludedTokens])
     }
 
-    protected validate(tokens: Record<string, string>) {
-        const newTokens = {} as Record<string, string>
-        for (const token of Object.entries(this.defaultTokenValues)) {
-            const tokenName = token[0]
-            const defaultTokenValue = token[1]
-
-            if (this.excludedTokens.includes(tokenName)) {
-                continue
-            }
-
-            if (!Object.hasOwn(tokens, tokenName)) {
-                newTokens[tokenName] = defaultTokenValue
-            } else {
-                newTokens[tokenName] = tokens[tokenName]
-            }
-        }
-        return newTokens
+    protected validate(params: Parameters<typeof Validates.validate>) {
+        return Validates.validate(...params)
     }
 
-    protected transformTokensToCssRuleObjectRecord(prefix: string, tokens: Record<string, string>) {
-        const newTokens = {} as Record<string, CSSRuleObject>
-        for (const token in tokens) {
-            const className = Strings.toKebabCase(token)
-            const cssVariantToken = `--${prefix}-${Strings.toKebabCase(token)}`
-            const cssVariantValue = tokens[token]
-
-            newTokens[`.bg-${className}`] = { 'background-color': `var(${cssVariantToken}, ${this.useDefaultValue ? cssVariantValue : ''})` }
-            newTokens[`.text-${className}`] = { color: `var(${cssVariantToken}, ${this.useDefaultValue ? cssVariantValue : ''})` }
-        }
-        return newTokens
+    protected transformTokensToCssRuleObject(prefix: string, tokens: Record<string, string>, hardcodeDefaultValue: boolean) {
+        const textTokens = Validates.transformTokenRecordToCssRuleObject(
+            tokens,
+            (name) => `.text-${Strings.toKebabCase(name)}`,
+            (name, value) => ({
+                'color': `var(--${prefix}-${Strings.toKebabCase(name)}, ${hardcodeDefaultValue ? value : ''})`
+            })
+        )
+        const bgTokens = Validates.transformTokenRecordToCssRuleObject(
+            tokens,
+            (name) => `.bg-${Strings.toKebabCase(name)}`,
+            (name, value) => ({
+                'background-color': `var(--${prefix}-${Strings.toKebabCase(name)}, ${hardcodeDefaultValue ? value : ''})`
+            })
+        )
+        return Object.assign({}, textTokens, bgTokens)
     }
 
     getPlugin() {
-        const tokens = this.transformTokensToCssRuleObjectRecord(this.prefix, this.tokens!)
+        const tokens = this.transformTokensToCssRuleObject(this.prefix, this.tokens, this.hardcodeDefaultValue)
         return plugin(({ addUtilities }) => {
             addUtilities(tokens)
         })

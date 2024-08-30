@@ -55,5 +55,3 @@ export interface IMaterialDesignThemeTokens {
     onTertiaryFixed: string
     onTertiaryFixedVariant: string
 }
-
-// export interface IMaterialDesignThemeToken
