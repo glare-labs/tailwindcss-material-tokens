@@ -2,7 +2,7 @@
 /**
  * provide*()
  */
-export * from './provide-all'
+export * from '../provide-all'
 export * from './provide-border'
 export * from './provide-color'
 export * from './provide-elevation'
