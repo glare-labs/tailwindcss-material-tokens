@@ -1,16 +1,9 @@
 import plugin from "tailwindcss/plugin";
-import type { IProvider } from "../declaration/provider.interface";
-import { Strings } from "../utils/strings";
+import type { IProvider } from "../../declaration/provider.interface";
+import type { IWindowSizing } from "../../declaration/window-sizing.interface";
+import { Strings } from "../../utils/strings";
 
-interface IWindowMediaQuery {
-    compact: string
-    medium: string
-    expanded: string
-    large: string
-    extraLarge: string
-}
-
-class DefaultWindowMediaQueryTokens implements IWindowMediaQuery {
+class DefaultWindowMediaQueryTokens implements IWindowSizing {
     compact = '@media (max-width: 600px)'
     medium = '@media (min-width: 600px) and (max-width: 840px)'
     expanded = '@media (min-width: 840px) and (max-width: 1200px)'
