@@ -1,5 +1,10 @@
 # tailwindcss-material-tokens
-Import the tokens of web components in material 3 into tailwindcss and use them through plugins.
+
+_If you wish, you are welcome to submit a document update request_
+
+---
+
+Import the Material Design tokens into tailwindcss and use them through plugins.
 
 + ESM Supported Only
 + Typescript Supported
@@ -22,6 +27,9 @@ export default {
     ],
 }
 ```
+
+---
+
 _If you don’t want to be troubled by the original styles of tailwindcss, please try to turn off the styles that come with tailwindcss (color, rounded, shadow, text)._
 
 ![Screenshot1](https://github.com/glare-labs/tailwindcss-material-tokens/blob/main/imgs/Part-1.png?raw=true)
@@ -38,34 +46,45 @@ For example:
 
 ### provideColor & provide*
 ```typescript
-import { provideColor, provideElevation, provideMotion, provideShape, provideTypography } from '@glare-labs/tailwindcss-material-tokens'
+import { provideBorder, provideColor, provideElevation, provideMotion, provideShape, provideSizing, provideTypography, provideWindowMediaQuery } from '@glare-labs/tailwindcss-material-tokens'
 
+
+const border = provideBorder()
 const color = provideColor()
 const elevation = provideElevation()
 const motion = provideMotion()
 const shape = provideShape()
+const sizing = provideSizing()
 const typography = provideTypography()
+const width = provideSizing()
+const mq = provideWindowMediaQuery()
 
 /** @type {import('tailwindcss').Config} */
 export default {
     // ...
 
     plugins: [
-        color.plugin(),
-        elevation.plugin(),
-        motion.plugin(),
-        shape.plugin(),
-        typography.plugin(),
+        border.getPlugin(),
+        color.getPlugin(),
+        elevation.getPlugin(),
+        motion.getPlugin(),
+        shape.getPlugin(),
+        sizing.getPlugin(),
+        typography.getPlugin(),
+        width.getPlugin(),
+        mq.getPlugin(),
     ],
 }
 ```
 
 ### provideAll
 provideAll includes:
+- border
 - color
 - elevation
 - motion
 - shape
+- sizing
 - typography
 
 ```typescript
@@ -78,12 +97,61 @@ export default {
     // ...
 
     plugins: [
-        ...all.allPlugins()
+        ...all.getAllPlugins()
     ],
 }
 ```
 
-## Default Value
+## APIs
+
+Most plugins support `prefix`, `hardcodeDefaultValue`, `excludeTokens` and `customTokens` options.
+
+### prefix
+prefix represents a public CSS variable:
+
+```typescript
+const color = provideColor({
+    prefix: 'my-product-prefix'
+})
+```
+
+the result:
+```css
+.bg-primary {
+    background-color: var(--my-product-prefix-primary, #005ac1);
+}
+```
+
+### hardcodeDefaultValue
+If hardcodeDefaultValue is true, the CSS contains a default value.
+
+```typescript
+const color = provideColor({
+    prefix: 'my-product-prefix',
+    hardcodeDefaultValue: false,
+})
+```
+
+the result:
+```css
+.bg-primary {
+    background-color: var(--my-product-prefix-primary,);
+}
+```
+
+### excludeTokens
+excludeTokens is a token blacklist, including unnecessary token groups.
+
+```typescript
+const color = provideColor({
+    excludeTokens: [
+        // remove .bg-primary and .text-primary
+        'primary'
+    ]
+})
+```
+
+## Default Color Values
 
 _Contains only color._
 ```javascript

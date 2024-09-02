@@ -1,12 +1,13 @@
-import { provideBorder, provideColor, provideElevation, provideMotion, provideShape, provideTypography, provideWindowMediaQuery } from '../src/index'
+import { provideBorder, provideColor, provideElevation, provideMotion, provideShape, provideSizing, provideTypography, provideWindowMediaQuery } from '../src/index'
 
-const color = provideColor({})
+const color = provideColor()
 const elevation = provideElevation({})
 const motion = provideMotion()
 const shape = provideShape()
 const typo = provideTypography()
 const border = provideBorder({})
 const mq = provideWindowMediaQuery()
+const width = provideSizing()
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -20,7 +21,8 @@ export default {
     shape.getPlugin(),
     typo.getPlugin(),
     border.getPlugin(),
-    mq.getPlugin()
+    mq.getPlugin(),
+    width.getPlugin(),
   ],
 }
 
