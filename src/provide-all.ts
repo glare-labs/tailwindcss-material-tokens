@@ -14,23 +14,23 @@ import { provideShape } from "./tokens/provide-shape";
 import { provideSizing } from "./tokens/provide-sizing";
 import { provideTypography } from "./tokens/provide-typography";
 
-export function provideAll(params: {
-    color?: Partial<TColorProviderConstructorParams>,
-    elevation?: Partial<TElevationProviderConstructorParams>,
-    motion?: TMotionProviderConstructorParams,
-    shape?: TShapeProviderConstructorParams,
-    typography?: TTypographyProviderConstructorParams,
-    border?: Partial<TBorderProviderConstructorParams>,
-    sizing?: Partial<TSizingProviderConstructorParams>,
-}) {
+export function provideAll(params?: Partial<{
+    color: Partial<TColorProviderConstructorParams>,
+    elevation: Partial<TElevationProviderConstructorParams>,
+    motion: TMotionProviderConstructorParams,
+    shape: TShapeProviderConstructorParams,
+    typography: TTypographyProviderConstructorParams,
+    border: Partial<TBorderProviderConstructorParams>,
+    sizing: Partial<TSizingProviderConstructorParams>,
+}>) {
     return ({
-        color: provideColor(params.color),
-        elevation: provideElevation(params.elevation),
-        motion: provideMotion(params.motion),
-        shape: provideShape(params.shape),
-        typography: provideTypography(params.typography),
-        border: provideBorder(params.border),
-        sizing: provideSizing(params.sizing),
+        color: provideColor(params?.color),
+        elevation: provideElevation(params?.elevation),
+        motion: provideMotion(params?.motion),
+        shape: provideShape(params?.shape),
+        typography: provideTypography(params?.typography),
+        border: provideBorder(params?.border),
+        sizing: provideSizing(params?.sizing),
         windowMediaQuery: provideWindowMediaQuery(),
         getAllPlugins() {
             return ([
@@ -38,6 +38,7 @@ export function provideAll(params: {
                 this.elevation.getPlugin(),
                 this.motion.getPlugin(),
                 this.shape.getPlugin(),
+                this.sizing.getPlugin(),
                 this.typography.getPlugin(),
                 this.border.getPlugin(),
                 this.windowMediaQuery.getPlugin(),
