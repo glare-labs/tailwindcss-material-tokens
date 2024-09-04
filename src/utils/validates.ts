@@ -31,7 +31,7 @@ export class Validates {
         return newTokens as Record<string, string>
     }
 
-    public static className(names: Array<string>, options?: Partial<{ toKebabCase: boolean, singleConnectionSymbol: boolean, preProcessingCallback: (prefix: string) => string, postProcessingCallback: (infix: string) => string }>) {
+    public static className(names: Array<string>, options?: Partial<{ toKebabCase: boolean, singleConnectionSymbol: boolean, preProcessingCallback: (before: string) => string, postProcessingCallback: (after: string) => string }>) {
         const processing = {
             pre: options?.preProcessingCallback ?? ((e) => e),
             post: options?.postProcessingCallback ?? ((e) => e),
