@@ -1,7 +1,16 @@
 {
-  "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
-    "rootDir": "./src",
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "declaration": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noEmit": true,
+    "pretty": true,
+    "sourceMap": true,
+    "strict": true,
     "outDir": "build",
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
@@ -15,8 +24,12 @@
     "lib": [
       "ES2022"
     ],
+    "baseUrl": "./",
   },
   "include": [
     "src/**/*.ts",
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

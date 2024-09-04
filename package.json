@@ -45,26 +45,41 @@
   "types": "build/index.d.ts",
   "typings": "build/index.d.ts",
   "workspaces": [
-    "test"
+    "dev-app"
   ],
   "scripts": {
-    "lint": "gts lint",
-    "clean": "gts clean",
-    "compile": "rollup --config",
-    "fix": "gts fix"
+    "dev": "wireit",
+    "compile": "wireit"
   },
   "author": "bre97-web",
   "license": "MIT",
   "type": "module",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
-    "@types/node": "20.8.2",
-    "gts": "^5.2.0",
-    "rollup": "^4.13.0",
-    "tailwindcss": "^3.4.1",
-    "typescript": "~5.2.0"
+    "@types/node": "22.5.3",
+    "rollup": "^4.21.2",
+    "tailwindcss": "^3.4.10",
+    "typescript": "~5.5.4",
+    "wireit": "^0.14.9"
+  },
+  "wireit": {
+    "dev": {
+      "command": "npm run dev -w dev-app",
+      "files": [
+        "src/**/*",
+        "dev-app/**/*"
+      ]
+    },
+    "compile": {
+      "command": "npx rollup --config",
+      "files": [
+        "src/**/*"
+      ],
+      "output": [
+        "build/**/*"
+      ],
+      "clean": true
+    }
   }
 }

@@ -1,7 +1,7 @@
 import terser from '@rollup/plugin-terser'
 import typescript from '@rollup/plugin-typescript'
 
-export default {
+export default ({
   input: './src/index.ts',
   output: [
     {
@@ -14,4 +14,4 @@ export default {
     typescript({ tsconfig: './tsconfig.json' }),
     terser(),
   ],
-}
+})
