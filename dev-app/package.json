@@ -1,17 +1,12 @@
 {
-  "name": "test",
-  "version": "1.0.0",
-  "main": "tailwind.config.js",
-  "private" :"true",
+  "name": "dev-app",
+  "version": "0.0.0",
+  "private": "true",
   "scripts": {
     "dev": "vite",
     "build": "vite build"
   },
   "type": "module",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "devDependencies": {
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
