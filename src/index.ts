@@ -7,6 +7,5 @@ export * from './deprecated/motion'
 export * from './deprecated/shape'
 export * from './deprecated/typography'
 
-export * from './media-queries/index'
-export * from './tokens/index'
+export * from "./tokens/index"
 
