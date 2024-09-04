@@ -23,4 +23,6 @@ build
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
+*.sw?.wireit
+
+.wireit
