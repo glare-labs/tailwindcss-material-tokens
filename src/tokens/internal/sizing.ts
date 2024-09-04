@@ -1,6 +1,6 @@
 import plugin from "tailwindcss/plugin";
 import type { IProvider } from "../../declaration/provider.interface";
-import type { IWindowSizing } from "../../declaration/window-sizing.interface";
+import { Tokens } from "../../declaration/token.interface";
 import { Strings } from "../../utils/strings";
 import { Validates } from "../../utils/validates";
 
@@ -19,7 +19,9 @@ export type TSizingProviderConstructorParams = {
      * }
      * ```
      */
-    readonly prefix: string
+    readonly classNamePrefix: string
+
+    readonly cssVariableTokenPrefix: string
 
     /**
      * @description
@@ -78,21 +80,27 @@ export type TSizingProviderConstructorParams = {
     readonly excludedTokens: Array<keyof (Omit<IWindowSizing, 'extraLarge'>) | {}>
 }
 
-abstract class DefaultWindowSizing implements IWindowSizing {
-    compact = '600px'
-    medium = '840px'
-    expanded = '1200px'
-    large = '1600px'
+export interface IWindowSizing {
+    readonly compact: string
+    readonly medium: string
+    readonly expanded: string
+    readonly large: string
+    readonly extraLarge: string
+}
+
+class DefaultSizingTokens extends Tokens<Omit<IWindowSizing, 'extraLarge'>> {
+    protected readonly compact = '600px'
+    protected readonly medium = '840px'
+    protected readonly expanded = '1200px'
+    protected readonly large = '1600px'
 
     /**
      * extraLarge: width >= 1600px
      * @deprecated
      */
-    extraLarge = '1600px'
-}
+    private readonly extraLarge = '1600px'
 
-class DefaultSizingTokens extends DefaultWindowSizing {
-    public get defaultTokensRecord() {
+    public get values() {
         return {
             compact: this.compact,
             medium: this.medium,
@@ -102,39 +110,38 @@ class DefaultSizingTokens extends DefaultWindowSizing {
     }
 }
 
+
 export class SizingProvider extends DefaultSizingTokens implements IProvider {
-    public prefix
-    public tokens
-    public hardcodeDefaultValue
-    public excludedTokens
-    public customTokens
+    private readonly classNamePrefix
+    private readonly cssVariableTokenPrefix
+    private readonly tokens
+    private readonly hardcodeDefaultValue
+    private readonly excludedTokens
+    private readonly customTokens
 
     constructor(params: Partial<TSizingProviderConstructorParams>) {
         super()
-        this.prefix = params.prefix ?? 'md-sys-sizing'
+        this.classNamePrefix = params.classNamePrefix ?? ''
+        this.cssVariableTokenPrefix = params.cssVariableTokenPrefix ?? 'md-sys-sizing'
         this.hardcodeDefaultValue = params.hardcodeDefaultValue ?? true
         this.excludedTokens = params.excludedTokens ?? []
         this.customTokens = params.customTokens ?? {}
-        this.tokens = this.validate([this.customTokens, this.defaultTokensRecord, this.excludedTokens])
+        this.tokens = Validates.validate(this.customTokens, this.values, this.excludedTokens)
     }
 
-    private validate(params: Parameters<typeof Validates.validate>) {
-        return Validates.validate(...params)
-    }
-
-    protected transformTokensToCssRuleObject(prefix: string, tokens: Record<string, string>, hardcodeDefaultValue: boolean) {
-        const cssPropertyComputed = (name: string, value: string) => !Object.hasOwn(this.customTokens, name) ? `var(--${prefix}-width-${Strings.toKebabCase(name)}, ${hardcodeDefaultValue ? value : ''})` : `${value}`
+    protected transformTokensToCssRuleObject(classNamePrefix: string, cssVariableTokenPrefix: string, tokens: Record<string, string>, hardcodeDefaultValue: boolean) {
+        const cssPropertyComputed = (name: string, value: string) => !Object.hasOwn(this.customTokens, name) ? `var(--${cssVariableTokenPrefix}-width-${Strings.toKebabCase(name)}, ${hardcodeDefaultValue ? value : ''})` : `${value}`
 
         const width = Validates.transformTokenRecordToCssRuleObject(
             tokens,
-            (name) => `.w-${Strings.toKebabCase(name)}`,
+            (name) => Validates.className(['.w', classNamePrefix, name]),
             (name, value) => ({
                 'width': cssPropertyComputed(name, value)
             })
         )
         const maxWidthScreen = Validates.transformTokenRecordToCssRuleObject(
             tokens,
-            (name) => `.max-w-screen-${Strings.toKebabCase(name)}`,
+            (name) => Validates.className(['.max-w-screen', classNamePrefix, name]),
             (name, value) => ({
                 'max-width': cssPropertyComputed(name, value)
             })
@@ -142,12 +149,13 @@ export class SizingProvider extends DefaultSizingTokens implements IProvider {
         return Object.assign({}, width, maxWidthScreen)
     }
 
-    getPlugin() {
-        const tokens = this.transformTokensToCssRuleObject(this.prefix, this.tokens, this.hardcodeDefaultValue)
-        console.log(tokens);
+    public get cssString() {
+        return this.transformTokensToCssRuleObject(this.classNamePrefix, this.cssVariableTokenPrefix, this.tokens, this.hardcodeDefaultValue)
+    }
 
+    getPlugin() {
         return plugin(({ addUtilities }) => {
-            addUtilities(tokens)
+            addUtilities(this.cssString)
         })
     }
 

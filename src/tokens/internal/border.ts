@@ -1,5 +1,6 @@
 import plugin from "tailwindcss/plugin"
 import type { IProvider } from "../../declaration/provider.interface"
+import { Tokens } from "../../declaration/token.interface"
 import { Strings } from "../../utils/strings"
 import { Validates } from "../../utils/validates"
 
@@ -18,7 +19,9 @@ export type TBorderProviderConstructorParams = {
      * }
      * ```
      */
-    readonly prefix: string
+    readonly classNamePrefix: string
+
+    readonly cssVariableTokenPrefix: string
 
     /**
     * @description
@@ -74,23 +77,20 @@ export type TBorderProviderConstructorParams = {
      * })
      * ```
      */
-    readonly excludedTokens: Array<(keyof IBorderTokens) | {}>
+    readonly excludedTokens: Array<keyof IBorderTokens | {}>
 
 }
 
-interface IBorderTokens {
-    outline: string
-    outlineVariant: string
+export interface IBorderTokens {
+    readonly outline: string
+    readonly outlineVariant: string
 }
 
-class DefaultBorderTokens implements IBorderTokens {
-    /**
-     * Colors
-     */
-    outline = '#727785'
-    outlineVariant = '#c2c6d6'
+class DefaultBorderTokens extends Tokens<IBorderTokens> {
+    protected outline = '#727785'
+    protected outlineVariant = '#c2c6d6'
 
-    public get defaultTokenRecord() {
+    public get values() {
         return {
             outline: this.outline,
             outlineVariant: this.outlineVariant,
@@ -99,38 +99,36 @@ class DefaultBorderTokens implements IBorderTokens {
 }
 
 export class BorderProvider extends DefaultBorderTokens implements IProvider {
-    private prefix
-    private tokens
-    private customTokens
-    private excludedTokens
-    private hardcodeDefaultValue
+    private readonly cssVariableTokenPrefix
+    private readonly classNamePrefix
+    private readonly tokens
+    private readonly customTokens
+    private readonly excludedTokens
+    private readonly hardcodeDefaultValue
 
     constructor(params: Partial<TBorderProviderConstructorParams>) {
         super()
-        this.prefix = params.prefix ?? 'md-sys-color'
+        this.classNamePrefix = params.classNamePrefix ?? ''
+        this.cssVariableTokenPrefix = params.cssVariableTokenPrefix ?? 'md-sys-color'
         this.hardcodeDefaultValue = params.hardcodeDefaultValue ?? true
         this.customTokens = params.customTokens ?? {}
         this.excludedTokens = params.excludedTokens ?? []
-        this.tokens = this.validate([this.customTokens as Record<string, string>, this.defaultTokenRecord, this.excludedTokens])
+        this.tokens = Validates.validate(this.customTokens as Record<string, string>, this.values, this.excludedTokens)
     }
 
-    private validate(params: Parameters<typeof Validates.validate>) {
-        return Validates.validate(...params)
-    }
-
-    protected transformTokensToCssRuleObject(prefix: string, tokens: Record<string, string>, hardcodeDefaultValue: boolean) {
-        const cssPropertyComputed = (name: string, value: string) => !Object.hasOwn(this.customTokens, name) ? `var(--${prefix}-${Strings.toKebabCase(name)}, ${hardcodeDefaultValue ? value : ''})` : `${value}`
+    protected transformTokensToCssRuleObject(classNamePrefix: string, cssVariableTokenPrefix: string, tokens: Record<string, string>, hardcodeDefaultValue: boolean) {
+        const cssPropertyComputed = (name: string, value: string) => !Object.hasOwn(this.customTokens, name) ? `var(--${cssVariableTokenPrefix}-${Strings.toKebabCase(name)}, ${hardcodeDefaultValue ? value : ''})` : `${value}`
 
         const borderTokens = Validates.transformTokenRecordToCssRuleObject(
             tokens,
-            (name) => `.border-${Strings.toKebabCase(name)}`,
+            (name) => Validates.className(['.border', classNamePrefix, name]),
             (name, value) => ({
                 'border-color': cssPropertyComputed(name, value)
             })
         )
         const outlineTokens = Validates.transformTokenRecordToCssRuleObject(
             tokens,
-            (name) => `.outline-${Strings.toKebabCase(name)}`,
+            (name) => Validates.className(['.outline', classNamePrefix, name]),
             (name, value) => ({
                 'outline-color': cssPropertyComputed(name, value)
             })
@@ -138,10 +136,13 @@ export class BorderProvider extends DefaultBorderTokens implements IProvider {
         return Object.assign({}, borderTokens, outlineTokens)
     }
 
-    getPlugin() {
-        const tokens = this.transformTokensToCssRuleObject(this.prefix, this.tokens, this.hardcodeDefaultValue)
+    public get cssString() {
+        return this.transformTokensToCssRuleObject(this.classNamePrefix, this.cssVariableTokenPrefix, this.tokens, this.hardcodeDefaultValue)
+    }
+
+    public getPlugin() {
         return plugin(({ addUtilities }) => {
-            addUtilities(tokens)
+            addUtilities(this.cssString)
         })
     }
 

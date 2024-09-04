@@ -1,4 +1,4 @@
-import plugin from 'tailwindcss/plugin.js'
+import plugin from 'tailwindcss/plugin'
 
 /**
  * @deprecated

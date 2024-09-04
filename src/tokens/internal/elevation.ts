@@ -1,5 +1,6 @@
 import plugin from "tailwindcss/plugin";
 import type { IProvider } from "../../declaration/provider.interface";
+import { Tokens } from "../../declaration/token.interface";
 import { Strings } from "../../utils/strings";
 import { Validates } from "../../utils/validates";
 
@@ -57,7 +58,9 @@ export type TElevationProviderConstructorParams = {
      * }
      * ```
      */
-    readonly prefix: string
+    readonly classNamePrefix: string
+
+    readonly cssVariableTokenPrefix: string
 
     /**
      * @description
@@ -117,31 +120,31 @@ export type TElevationProviderConstructorParams = {
 }
 
 export interface IElevation {
-    levelNone: string
-    level1: string
-    level2: string
-    level3: string
-    level4: string
-    level5: string
+    readonly levelNone: string
+    readonly level1: string
+    readonly level2: string
+    readonly level3: string
+    readonly level4: string
+    readonly level5: string
 }
 
-class DefaultElevationTokens implements IElevation {
-    levelNone = 'none'
-    level1
-    level2
-    level3
-    level4
-    level5
+class DefaultElevationTokens extends Tokens<IElevation> {
+    protected readonly levelNone = 'none'
+    protected readonly level1
+    protected readonly level2
+    protected readonly level3
+    protected readonly level4
+    protected readonly level5
 
     constructor(shadowColorCssVariableLayer1: string, shadowColorCssVariableLayer2: string, shadowColorCssVariableLayer3: string) {
+        super()
         this.level1 = `${shadowColorCssVariableLayer1} 0px 2px 1px -1px, ${shadowColorCssVariableLayer2} 0px 1px 1px 0px, ${shadowColorCssVariableLayer3} 0px 1px 3px 0px`
         this.level2 = `${shadowColorCssVariableLayer1} 0px 3px 3px -2px, ${shadowColorCssVariableLayer2} 0px 3px 4px 0px, ${shadowColorCssVariableLayer3} 0px 1px 8px 0px`
         this.level3 = `${shadowColorCssVariableLayer1} 0px 3px 5px -1px, ${shadowColorCssVariableLayer2} 0px 6px 10px 0px, ${shadowColorCssVariableLayer3} 0px 1px 18px 0px`
         this.level4 = `${shadowColorCssVariableLayer1} 0px 5px 5px -3px, ${shadowColorCssVariableLayer2} 0px 8px 10px 1px, ${shadowColorCssVariableLayer3} 0px 3px 14px 2px`
         this.level5 = `${shadowColorCssVariableLayer1} 0px 7px 8px -4px, ${shadowColorCssVariableLayer2} 0px 12px 17px 2px, ${shadowColorCssVariableLayer3} 0px 5px 22px 4px`
     }
-
-    public get defaultTokenRecord() {
+    public get values() {
         return {
             levelNone: this.levelNone,
             level1: this.level1,
@@ -154,11 +157,12 @@ class DefaultElevationTokens implements IElevation {
 }
 
 export class ElevationProvider extends DefaultElevationTokens implements IProvider {
-    public prefix
-    public hardcodeDefaultValue
-    public excludedTokens
-    public tokens
-    public customTokens
+    public readonly classNamePrefix
+    public readonly cssVariableTokenPrefix
+    public readonly hardcodeDefaultValue
+    public readonly excludedTokens
+    public readonly tokens
+    public readonly customTokens
 
     constructor(params: Partial<TElevationProviderConstructorParams>) {
         const shadowColorCssVariableLayer1 = params.shadowColorCssVariable?.layer1 ?? `var(--${params.shadowColorTokenPrefix ?? 'md-sys-color'}-shadow, rgba(0, 0, 0, 0.2))`
@@ -166,33 +170,35 @@ export class ElevationProvider extends DefaultElevationTokens implements IProvid
         const shadowColorCssVariableLayer3 = params.shadowColorCssVariable?.layer3 ?? `var(--${params.shadowColorTokenPrefix ?? 'md-sys-color'}-shadow, rgba(0, 0, 0, 0.12))`
         super(shadowColorCssVariableLayer1, shadowColorCssVariableLayer2, shadowColorCssVariableLayer3)
 
-        this.prefix = params.prefix ?? 'md-sys-elevation'
+        this.classNamePrefix = params.classNamePrefix ?? ''
+        this.cssVariableTokenPrefix = params.cssVariableTokenPrefix ?? 'md-sys-elevation'
         this.hardcodeDefaultValue = params.hardcodeDefaultValue ?? true
         this.excludedTokens = params.excludedTokens ?? []
         this.customTokens = params.customTokens ?? {}
-        this.tokens = this.validate([this.customTokens as Record<string, string>, this.defaultTokenRecord, this.excludedTokens])
+        this.tokens = Validates.validate(this.customTokens as Record<string, string>, this.values, this.excludedTokens)
     }
 
-    protected validate(params: Parameters<typeof Validates.validate>) {
-        return Validates.validate(...params)
-    }
-
-    protected transformTokensToCssRuleObject(prefix: string, tokens: Record<string, string>, hardcodeDefaultValue: boolean) {
-        const cssPropertyComputed = (name: string, value: string) => !Object.hasOwn(this.customTokens, name) ? `var(--${prefix}-${Strings.toKebabCase(name)}, ${hardcodeDefaultValue ? value : ''})` : `${value}`
+    protected transformTokensToCssRuleObject(classNamePrefix: string, cssVariableTokenPrefix: string, tokens: Record<string, string>, hardcodeDefaultValue: boolean) {
+        const cssPropertyComputed = (name: string, value: string) => !Object.hasOwn(this.customTokens, name) ? `var(--${cssVariableTokenPrefix}-${Strings.toKebabCase(name)}, ${hardcodeDefaultValue ? value : ''})` : `${value}`
 
         return Validates.transformTokenRecordToCssRuleObject(
             tokens,
-            (name) => `.${Strings.toKebabCase(name).replace('level', 'elevation')}`,
+            (name) => Validates.className(['.elevation', classNamePrefix, name], {
+                preProcessingCallback: (before) => before.replace('level', ''),
+            }),
             (name, value) => ({
                 'box-shadow': cssPropertyComputed(name, value)
             })
         )
     }
 
+    public get cssString() {
+        return this.transformTokensToCssRuleObject(this.classNamePrefix, this.cssVariableTokenPrefix, this.tokens, this.hardcodeDefaultValue)
+    }
+
     public getPlugin() {
-        const tokens = this.transformTokensToCssRuleObject(this.prefix, this.tokens, this.hardcodeDefaultValue)
         return plugin(({ addUtilities }) => {
-            addUtilities(tokens)
+            addUtilities(this.cssString)
         })
     }
 }
