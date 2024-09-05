@@ -80,10 +80,7 @@ export const provideMotion = (params: TMotionProviderConstructorParams = {
  * }
  * ```
  */
-export const provideShape = (param: TShapeProviderConstructorParams = {
-    prefix: 'md-sys-shape',
-    defaultUnit: '1',
-}) => new ShapeProvider(param)
+export const provideShape = (param?: Partial<TShapeProviderConstructorParams>) => new ShapeProvider(param ?? {})
 
 export const provideSizing = (params?: Partial<TSizingProviderConstructorParams>) => new SizingProvider(params ?? {})
 
