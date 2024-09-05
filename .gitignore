@@ -26,3 +26,4 @@ build
 *.sw?.wireit
 
 .wireit
+docs
