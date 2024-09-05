@@ -89,10 +89,10 @@ export interface IWindowSizing {
 }
 
 class DefaultSizingTokens extends Tokens<Omit<IWindowSizing, 'extraLarge'>> {
-    protected readonly compact = '600px'
-    protected readonly medium = '840px'
-    protected readonly expanded = '1200px'
-    protected readonly large = '1600px'
+    private readonly compact = '600px'
+    private readonly medium = '840px'
+    private readonly expanded = '1200px'
+    private readonly large = '1600px'
 
     /**
      * extraLarge: width >= 1600px
@@ -134,14 +134,14 @@ export class SizingProvider extends DefaultSizingTokens implements IProvider {
 
         const width = Validates.transformTokenRecordToCssRuleObject(
             tokens,
-            (name) => Validates.className(['.w', classNamePrefix, name]),
+            (name) => Validates.className(['w', classNamePrefix, name]),
             (name, value) => ({
                 'width': cssPropertyComputed(name, value)
             })
         )
         const maxWidthScreen = Validates.transformTokenRecordToCssRuleObject(
             tokens,
-            (name) => Validates.className(['.max-w-screen', classNamePrefix, name]),
+            (name) => Validates.className(['max-w-screen', classNamePrefix, name]),
             (name, value) => ({
                 'max-width': cssPropertyComputed(name, value)
             })

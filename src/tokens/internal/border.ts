@@ -121,14 +121,14 @@ export class BorderProvider extends DefaultBorderTokens implements IProvider {
 
         const borderTokens = Validates.transformTokenRecordToCssRuleObject(
             tokens,
-            (name) => Validates.className(['.border', classNamePrefix, name]),
+            (name) => Validates.className(['border', classNamePrefix, name]),
             (name, value) => ({
                 'border-color': cssPropertyComputed(name, value)
             })
         )
         const outlineTokens = Validates.transformTokenRecordToCssRuleObject(
             tokens,
-            (name) => Validates.className(['.outline', classNamePrefix, name]),
+            (name) => Validates.className(['outline', classNamePrefix, name]),
             (name, value) => ({
                 'outline-color': cssPropertyComputed(name, value)
             })

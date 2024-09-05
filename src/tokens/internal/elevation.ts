@@ -183,7 +183,7 @@ export class ElevationProvider extends DefaultElevationTokens implements IProvid
 
         return Validates.transformTokenRecordToCssRuleObject(
             tokens,
-            (name) => Validates.className(['.elevation', classNamePrefix, name], {
+            (name) => Validates.className(['elevation', classNamePrefix, name], {
                 preProcessingCallback: (before) => before.replace('level', ''),
             }),
             (name, value) => ({

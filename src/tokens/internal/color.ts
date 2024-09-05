@@ -297,14 +297,14 @@ export class ColorProvider extends DefaultColorTokens implements IProvider {
 
         const textTokens = Validates.transformTokenRecordToCssRuleObject(
             tokens,
-            (name) => Validates.className([`.text`, classNamePrefix, name], {}),
+            (name) => Validates.className([`text`, classNamePrefix, name], {}),
             (name, value) => ({
                 'color': cssPropertyComputed(name, value)
             })
         )
         const bgTokens = Validates.transformTokenRecordToCssRuleObject(
             tokens,
-            (name) => Validates.className([`.bg`, classNamePrefix, name], {}),
+            (name) => Validates.className([`bg`, classNamePrefix, name], {}),
             (name, value) => ({
                 'background-color': cssPropertyComputed(name, value)
             })

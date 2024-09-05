@@ -45,7 +45,7 @@ export class Validates {
             className = names.map(name => processing.post(processing.pre(name))).reduce((pre: string, cur: string, index) => `${pre}-${cur}`)
         }
 
-        let res = ''
+        let res = '.'
         if (options?.singleConnectionSymbol ?? true) {
             let lastChar: string | null = null
             for (const char of className) {
@@ -55,6 +55,10 @@ export class Validates {
                 res += char
                 lastChar = char
             }
+        }
+
+        if (res.length >= 2 && res[1] === '-') {
+            res = '.' + res.slice(2)
         }
 
         return res
