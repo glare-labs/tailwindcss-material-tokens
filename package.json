@@ -48,8 +48,9 @@
     "dev-app"
   ],
   "scripts": {
-    "dev": "wireit",
-    "compile": "wireit"
+    "dev:dev-app": "wireit",
+    "compile": "wireit",
+    "build:dev-app": "wireit"
   },
   "author": "bre97-web",
   "license": "MIT",
@@ -64,7 +65,7 @@
     "wireit": "^0.14.9"
   },
   "wireit": {
-    "dev": {
+    "dev:dev-app": {
       "command": "npm run dev -w dev-app",
       "files": [
         "src/**/*",
@@ -80,6 +81,9 @@
         "build/**/*"
       ],
       "clean": true
+    },
+    "build:dev-app": {
+      "command": "npm run build -w dev-app"
     }
   }
 }

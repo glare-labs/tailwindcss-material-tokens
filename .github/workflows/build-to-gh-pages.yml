@@ -32,7 +32,7 @@ jobs:
         run: npm run compile
 
       - name: Build test page
-        run: npm run build -w test
+        run: npm run build:dev-app
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
