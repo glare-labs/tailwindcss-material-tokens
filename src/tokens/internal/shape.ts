@@ -9,7 +9,7 @@ export type TShapeProviderConstructorParams = {
     readonly classNamePrefix: string
     readonly hardcodeDefaultValue: boolean
     readonly customTokens: IShapeTokens | Record<string, string>
-    readonly excludedTokens: Array<(keyof IShapeTokens) | {}>
+    readonly excludedTokens: Array<(keyof IShapeTokens)>
     readonly unit: string
     readonly unitSize: number
 }
@@ -62,7 +62,6 @@ export class ShapeProvider extends DefaultShapeTokens implements IProvider {
     private readonly cssVariableTokenPrefix
     private readonly hardcodeDefaultValue
     private readonly excludedTokens
-    private readonly tokens
     private readonly customTokens
 
     constructor(params?: Partial<TShapeProviderConstructorParams>) {
@@ -72,8 +71,10 @@ export class ShapeProvider extends DefaultShapeTokens implements IProvider {
         this.hardcodeDefaultValue = params?.hardcodeDefaultValue ?? true
         this.excludedTokens = params?.excludedTokens ?? []
         this.customTokens = params?.customTokens ?? {}
+    }
 
-        this.tokens = Validates.validate(this.customTokens as Record<string, string>, this.values, this.excludedTokens)
+    private get tokens() {
+        return Validates.merge(Validates.filter(this.values, this.excludedTokens), this.customTokens) as Record<string, string>
     }
 
     public get cssString() {

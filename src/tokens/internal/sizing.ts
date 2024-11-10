@@ -77,7 +77,7 @@ export type TSizingProviderConstructorParams = {
      * })
      * ```
      */
-    readonly excludedTokens: Array<keyof (Omit<IWindowSizing, 'extraLarge'>) | {}>
+    readonly excludedTokens: Array<keyof (Omit<IWindowSizing, 'extraLarge'>)>
 }
 
 export interface IWindowSizing {
@@ -114,7 +114,6 @@ class DefaultSizingTokens extends Tokens<Omit<IWindowSizing, 'extraLarge'>> {
 export class SizingProvider extends DefaultSizingTokens implements IProvider {
     private readonly classNamePrefix
     private readonly cssVariableTokenPrefix
-    private readonly tokens
     private readonly hardcodeDefaultValue
     private readonly excludedTokens
     private readonly customTokens
@@ -126,7 +125,10 @@ export class SizingProvider extends DefaultSizingTokens implements IProvider {
         this.hardcodeDefaultValue = params.hardcodeDefaultValue ?? true
         this.excludedTokens = params.excludedTokens ?? []
         this.customTokens = params.customTokens ?? {}
-        this.tokens = Validates.validate(this.customTokens, this.values, this.excludedTokens)
+    }
+
+    private get tokens() {
+        return Validates.merge(Validates.filter(this.values, this.excludedTokens), this.customTokens) as Record<string, string>
     }
 
     protected transformTokensToCssRuleObject(classNamePrefix: string, cssVariableTokenPrefix: string, tokens: Record<string, string>, hardcodeDefaultValue: boolean) {

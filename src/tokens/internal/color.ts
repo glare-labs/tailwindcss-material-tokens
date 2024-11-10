@@ -78,7 +78,7 @@ export type TColorProviderConstructorParams = {
      * })
      * ```
      */
-    readonly excludedTokens: Array<(keyof IColorTokens) | {}>
+    readonly excludedTokens: Array<(keyof IColorTokens)>
 
     /**
      * @default ''
@@ -275,7 +275,6 @@ class DefaultColorTokens extends Tokens<IColorTokens> {
 }
 
 export class ColorProvider extends DefaultColorTokens implements IProvider {
-    private readonly tokens
     private readonly hardcodeDefaultValue
     private readonly excludedTokens
     private readonly customTokens
@@ -289,7 +288,10 @@ export class ColorProvider extends DefaultColorTokens implements IProvider {
         this.hardcodeDefaultValue = params.hardcodeDefaultValue ?? true
         this.excludedTokens = params.excludedTokens ?? []
         this.customTokens = params.customTokens ?? {}
-        this.tokens = Validates.validate((this.customTokens) as Record<string, string>, this.values, this.excludedTokens)
+    }
+
+    private get tokens() {
+        return Validates.merge(Validates.filter(this.values, this.excludedTokens), this.customTokens) as Record<string, string>
     }
 
     protected transformTokensToCssRuleObject(classNamePrefix: string, cssVariableTokenPrefix: string, tokens: Record<string, string>, hardcodeDefaultValue: boolean) {

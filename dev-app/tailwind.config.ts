@@ -1,8 +1,8 @@
-import { provideBorder, provideColor, provideElevation, provideMotion, provideShape, provideSizing, provideTypography, provideWindowMediaQuery } from '../src/index'
-// import { provideBorder, provideColor, provideElevation, provideMotion, provideShape, provideSizing, provideTypography, provideWindowMediaQuery } from '../build'
+// import { provideBorder, provideColor, provideElevation, provideMotion, provideShape, provideSizing, provideTypography, provideWindowMediaQuery } from '../src/index'
+import { provideBorder, provideColor, provideElevation, provideMotion, provideShape, provideSizing, provideTypography, provideWindowMediaQuery } from '../build'
 
-export const color = provideColor()
-export const elevation = provideElevation({})
+export const color = provideColor({})
+export const elevation = provideElevation()
 export const motion = provideMotion()
 export const shape = provideShape()
 export const typo = provideTypography()

@@ -77,7 +77,7 @@ export type TBorderProviderConstructorParams = {
      * })
      * ```
      */
-    readonly excludedTokens: Array<keyof IBorderTokens | {}>
+    readonly excludedTokens: Array<keyof IBorderTokens>
 
 }
 
@@ -101,7 +101,6 @@ class DefaultBorderTokens extends Tokens<IBorderTokens> {
 export class BorderProvider extends DefaultBorderTokens implements IProvider {
     private readonly cssVariableTokenPrefix
     private readonly classNamePrefix
-    private readonly tokens
     private readonly customTokens
     private readonly excludedTokens
     private readonly hardcodeDefaultValue
@@ -113,7 +112,10 @@ export class BorderProvider extends DefaultBorderTokens implements IProvider {
         this.hardcodeDefaultValue = params.hardcodeDefaultValue ?? true
         this.customTokens = params.customTokens ?? {}
         this.excludedTokens = params.excludedTokens ?? []
-        this.tokens = Validates.validate(this.customTokens as Record<string, string>, this.values, this.excludedTokens)
+    }
+
+    private get tokens() {
+        return Validates.merge(Validates.filter(this.values, this.excludedTokens), this.customTokens) as Record<string, string>
     }
 
     protected transformTokensToCssRuleObject(classNamePrefix: string, cssVariableTokenPrefix: string, tokens: Record<string, string>, hardcodeDefaultValue: boolean) {

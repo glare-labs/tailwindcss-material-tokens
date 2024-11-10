@@ -36,7 +36,7 @@ export const provideBorder = (param?: Partial<TBorderProviderConstructorParams>)
  * })
  * ```
  */
-export const provideColor = (params?: Partial<TColorProviderConstructorParams>) => new ColorProvider(params ?? {})
+export const provideColor = (params?: Partial<TColorProviderConstructorParams>) => new ColorProvider({ ...params })
 
 /**
  * @example

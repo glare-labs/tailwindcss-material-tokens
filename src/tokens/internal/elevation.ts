@@ -116,7 +116,7 @@ export type TElevationProviderConstructorParams = {
      * })
      * ```
      */
-    readonly excludedTokens: Array<(keyof IElevation) | {}>
+    readonly excludedTokens: Array<(keyof IElevation)>
 }
 
 export interface IElevation {
@@ -161,7 +161,6 @@ export class ElevationProvider extends DefaultElevationTokens implements IProvid
     public readonly cssVariableTokenPrefix
     public readonly hardcodeDefaultValue
     public readonly excludedTokens
-    public readonly tokens
     public readonly customTokens
 
     constructor(params: Partial<TElevationProviderConstructorParams>) {
@@ -175,7 +174,10 @@ export class ElevationProvider extends DefaultElevationTokens implements IProvid
         this.hardcodeDefaultValue = params.hardcodeDefaultValue ?? true
         this.excludedTokens = params.excludedTokens ?? []
         this.customTokens = params.customTokens ?? {}
-        this.tokens = Validates.validate(this.customTokens as Record<string, string>, this.values, this.excludedTokens)
+    }
+
+    private get tokens() {
+        return Validates.merge(Validates.filter(this.values, this.excludedTokens), this.customTokens) as Record<string, string>
     }
 
     protected transformTokensToCssRuleObject(classNamePrefix: string, cssVariableTokenPrefix: string, tokens: Record<string, string>, hardcodeDefaultValue: boolean) {
